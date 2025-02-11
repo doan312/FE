@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) navigator.serviceWorker.register('/8hz-FE/dev-sw.js?dev-sw', { scope: '/8hz-FE/', type: 'classic' })
