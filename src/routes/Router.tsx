@@ -12,6 +12,7 @@ const DesignerDetail = lazy(() => import("../pages/designers/DesignerDetail"));/
 const PaymentTransfer = lazy(() => import("../pages/designers/PaymentTransfer"));//결제이동
 const ReservationComplete = lazy(() => import("../pages/designers/ReservationComplete"));//예약완료
 
+const NotFound = lazy(() => import("../pages/NotFound")); // 404 페이지 추가
 // 로딩 중 표시할 컴포넌트
 const Loading = () => <div className="loading">Loading...</div>;
 
@@ -28,6 +29,10 @@ const Router = () => {
         <Route path="/paymenttransfer" element={<PaymentTransfer  />} />
         <Route path="/reservationcomplete" element={<ReservationComplete />} />
 
+
+        {/* 🔹 404 Not Found 라우트 추가 */}
+        <Route path="*" element={<NotFound />} />
+        
       </Routes>
     </Suspense>
   );
