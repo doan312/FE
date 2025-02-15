@@ -70,6 +70,10 @@ export default {
             lineHeight: px0_100,
             minWidth: px0_200,
             minHeight: px0_200,
+            maxWidth: px0_200,
+            maxHeight: px0_200,
+            width: px0_200,
+            height: px0_200,
             spacing: px0_200,
             inset: px0_100,
             gap: px0_100,
@@ -105,26 +109,10 @@ export default {
             },
             animation: {
                 fadeIn: 'fadeIn 1s ease-out',
-            },
-            height: {
-                50: '200px', // lg 화면
-                75: '250px', // md 화면
-                100: '275px', // 기본값
-            },
-            spacing: {
-                '15vh': '17vh',
-                '20vh': '20vh',
-            },
-            width: {
-                'screen-60': '60vw', // 화면 너비의 60%
-            },
-            animation: {
                 'bounce-200': 'bounce 1s infinite 200ms', // 200ms 지연
                 'bounce-400': 'bounce 1s infinite 400ms', // 400ms 지연
                 'bounce-600': 'bounce 1s infinite 600ms', // 600ms 지연
                 'bounce-800': 'bounce 1s infinite 800ms', // 800ms 지연
-            },
-            animation: {
                 'slide-out': 'slideOut 1s forwards',
                 'slide-in': 'slideIn 1s forwards',
             },
