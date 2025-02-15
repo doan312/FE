@@ -1,18 +1,26 @@
 //디자이너 상세 페이지(예약 정보 입력 페이지)
 
-import React from "react";
+import React from 'react'
+import DesignerInfo from '../../components/designerDetail/DesignerInfo'
+import Calendar from '../../components/designerDetail/Calendar'
+import Divider from '../../components/designerDetail/Divider'
 
 const DesignerDetail: React.FC = () => {
-  return (
-    <div className="flex justify-center items-center min-h-screen w-screen bg-gray-100 p-4">
-      <div className="flex flex-col md:flex-row w-full max-w-7xl max-h-screen bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
-        <div className="md:w-1/2 p-6 md:p-8 lg:p-10 text-left flex flex-col justify-center">
-          <p className="text-5xl font-bold text-blue-600">test</p>
-          <p className="text-lg text-gray-600">test</p>
-        </div>
-      </div>
-    </div>
-  );
-};
+    return (
+        <div className='relative h-screen w-screen flex-auto flex-col items-center justify-center'>
+            <img
+                src='http://localhost:5173/img/Banner.png'
+                alt='designer'
+                className='h-2/5 w-full object-fill pb-20'
+            />
 
-export default DesignerDetail;
+            <div className='absolute bottom-0 h-4/5 w-full rounded-t-2xl bg-white shadow-md'>
+                <DesignerInfo />
+                <Divider />
+                <Calendar />
+            </div>
+        </div>
+    )
+}
+
+export default DesignerDetail
