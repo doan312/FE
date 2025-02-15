@@ -6,7 +6,7 @@ const ToggleButton: React.FC = () => {
 
     return (
         <div
-            className='relative flex h-12 w-full cursor-pointer rounded-10 bg-gray-300 pl-1 pr-1 pt-1'
+            className='relative flex h-12 w-full cursor-pointer rounded-10 bg-gray-300 pt-1'
             onClick={() =>
                 setSelected(selected === '직접' ? '온라인' : '직접')
             }>
