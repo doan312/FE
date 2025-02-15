@@ -8,7 +8,7 @@ const ReservationInfo: React.FC = () => {
         <span className="px-2 py-1 font-semibold text-blue-600 bg-blue-100 rounded-md text-sm mr-1">
           온라인
         </span>
-        <p className="text-gray-800 font-bold text-lg">05.26(일) 오후 1:00~오후 1:30</p>
+        <p className="text-gray-950 font-semibold text-lg">05.26(일) 오후 1:00~오후 1:30</p>
       </div>
     </div>
   );

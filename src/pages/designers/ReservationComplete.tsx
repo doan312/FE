@@ -40,8 +40,9 @@ const ReservationComplete: React.FC = () => {
       <h2 className="text-2xl font-bold text-gray-900">예약이 완료됐어요</h2>
 
       {/* 예약 정보 컴포넌트 삽입 */}
+      <div className="mb-1">
       <ReservationInfo />
-
+</div>
            {/* 결제 정보 컴포넌트 삽입 - 결제 방식이 "bankTransfer"일 때만 표시 */}
            {paymentMethod === "bankTransfer" && <PaymentInfo />}
     {/* 하단 고정 버튼 그룹 */}

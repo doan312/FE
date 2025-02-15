@@ -69,7 +69,7 @@ const PaymentTransfer: React.FC = () => {
           <p className="font-semibold text-lg text-black">05.26(일) 오후 1:00~오후 1:30</p>
         </div>
 {/* 구분선 추가 */}
-<div className="relative w-full mb-8">
+<div className="relative w-full mb-7">
   <div className="absolute left-0 w-full border-t-1 border-gray-400"></div>
 </div>
         {/* 결제 금액 */}
