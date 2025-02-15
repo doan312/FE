@@ -7,14 +7,14 @@ import Divider from '../../components/designerDetail/Divider'
 
 const DesignerDetail: React.FC = () => {
     return (
-        <div className='relative h-screen w-screen flex-auto flex-col items-center justify-center'>
+        <div className='relative min-h-screen w-screen flex-auto flex-col items-center justify-center'>
             <img
                 src='http://localhost:5173/img/Banner.png'
                 alt='designer'
-                className='h-2/5 w-full object-fill pb-20'
+                className='h-2/5 w-full object-cover'
             />
 
-            <div className='absolute bottom-0 h-4/5 w-full rounded-t-2xl bg-white shadow-md'>
+            <div className='relative z-10 -mt-20 w-full flex-auto rounded-t-2xl bg-white shadow-md'>
                 <DesignerInfo />
                 <Divider />
                 <Reservation />
