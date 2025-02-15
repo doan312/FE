@@ -2,7 +2,7 @@
 
 import React from 'react'
 import DesignerInfo from '../../components/designerDetail/DesignerInfo'
-import Calendar from '../../components/designerDetail/Calendar'
+import Reservation from '../../components/designerDetail/Reservation'
 import Divider from '../../components/designerDetail/Divider'
 
 const DesignerDetail: React.FC = () => {
@@ -17,7 +17,7 @@ const DesignerDetail: React.FC = () => {
             <div className='absolute bottom-0 h-4/5 w-full rounded-t-2xl bg-white shadow-md'>
                 <DesignerInfo />
                 <Divider />
-                <Calendar />
+                <Reservation />
             </div>
         </div>
     )
