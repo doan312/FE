@@ -9,7 +9,7 @@ export default function HotNewCard() {
     return (
         <Link
             to='#'
-            className='border=[#eeeeee] flex h-fit w-150 flex-col items-center gap-13 rounded-8 bg-gray-100 py-18 shadow-[0_1px_12px_rgba(0,0,0,0.08)]'>
+            className='mb-45 mt-14 flex h-[223px] w-150 shrink-0 flex-col items-center gap-13 rounded-8 border-[#eeeeee] bg-gray-100 py-18 shadow-[0_1px_12px_rgba(0,0,0,0.08)]'>
             <Profile size='lg' imgUrl={DesignerImg} />
             <div className='flex flex-col items-center gap-2'>
                 <span className='font-semibold text-black text-body1'>
