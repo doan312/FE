@@ -2,7 +2,7 @@ import BannerImage from '../../../public/img/banner image_01.png'
 
 export default function Banner() {
     return (
-        <div className='h-170 relative mb-44 flex w-[323px] justify-end rounded-12 bg-BN-blue'>
+        <div className='h-170 relative mb-44 flex w-[323px] justify-end overflow-hidden rounded-12 bg-BN-blue'>
             <img src={BannerImage} alt='배너 이미지' />
             <div className='absolute bottom-0 left-0 right-0 flex flex-col gap-5 pb-16 overflow-hidden px-18 pt-15 h-fit bg-gradient-to-b from-transparent to-black/60'>
                 <span className='font-semibold text-gray-100 text-h3'>

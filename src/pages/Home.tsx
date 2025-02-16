@@ -5,6 +5,7 @@ import Logo from '../components/home/Logo'
 import MainSection from '../components/home/MainSection'
 import Banner from '../components/home/Banner'
 import RescheduleBanner from '../components/home/RescheduleBanner'
+import HotNewSection from '../components/home/HotNewSection'
 
 const Home: React.FC = () => {
     return (
@@ -13,6 +14,7 @@ const Home: React.FC = () => {
             <MainSection />
             <Banner />
             <RescheduleBanner />
+            <HotNewSection />
         </div>
     )
 }
