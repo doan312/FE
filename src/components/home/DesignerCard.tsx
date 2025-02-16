@@ -6,7 +6,7 @@ import Profile from './Profile'
 
 export default function DesignerCard() {
     return (
-        <div className='flex w-[335px] items-center gap-14 rounded-12 bg-gray-100 px-12 py-10 shadow-[0_1px_12px_0_gba(0,0,0,0.08)]'>
+        <div className='flex w-full items-center gap-14 rounded-12 bg-gray-100 px-12 py-10 shadow-[0_1px_12px_rgba(0,0,0,0.08)]'>
             <Profile imgUrl={DesignerImg} />
             <div className='flex flex-col items-start gap-6 grow'>
                 <div className='flex flex-col items-start'>
