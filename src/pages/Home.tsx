@@ -1,18 +1,27 @@
-//홈화면
+// 홈 화면
 
-import React from "react";
+import React from 'react'
+import Logo from '../components/home/Logo'
+import MainSection from '../components/home/MainSection'
+import Banner from '../components/home/Banner'
+import RescheduleBanner from '../components/home/RescheduleBanner'
+import HotNewSection from '../components/home/HotNewSection'
+import BeforeAfterSection from '../components/home/BeforeAfterSection'
+import TabBar from '../components/TabBar/TabBar'
 
 const Home: React.FC = () => {
-  return (
-    <div className="flex justify-center items-center min-h-screen w-screen bg-gray-100 p-4">
-      <div className="flex flex-col md:flex-row w-full max-w-7xl max-h-screen bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
-        <div className="md:w-1/2 p-6 md:p-8 lg:p-10 text-left flex flex-col justify-center">
-          <p className="text-5xl font-bold text-blue-600">test</p>
-          <p className="text-lg text-gray-600">test</p>
+    return (
+        <div className='relative w-full px-16 bg-gray-100 -z-10 pb-155'>
+            <div className='absolute left-0 right-0 top-0 -z-10 -m-16 h-[852px] bg-gradient-to-b from-purple-50 to-gray-100'></div>
+            <Logo />
+            <MainSection />
+            <Banner />
+            <RescheduleBanner />
+            <HotNewSection />
+            <BeforeAfterSection />
+            <TabBar />
         </div>
-      </div>
-    </div>
-  );
-};
+    )
+}
 
-export default Home;
+export default Home
