@@ -1,23 +1,57 @@
 //디자이너 상세 페이지(예약 정보 입력 페이지)
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DesignerInfo from '../../components/designerDetail/DesignerInfo'
-import Calendar from '../../components/designerDetail/Calendar'
+import Reservation from '../../components/designerDetail/Reservation'
 import Divider from '../../components/designerDetail/Divider'
+import ButtonLg from '../../components/designerDetail/ButtonLg'
+import { SlArrowLeft } from 'react-icons/sl'
+import { IconContext } from 'react-icons'
 
 const DesignerDetail: React.FC = () => {
+    const [isScrolled, setIsScrolled] = useState(false)
+
+    const handleScroll = () => {
+        const bannerHeight = window.innerHeight * 0.25
+        if (window.scrollY > bannerHeight) {
+            setIsScrolled(true)
+        } else {
+            setIsScrolled(false)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll)
+        return () => {
+            window.removeEventListener('scroll', handleScroll)
+        }
+    }, [])
+
     return (
-        <div className='relative h-screen w-screen flex-auto flex-col items-center justify-center'>
+        <div className='relative mt-0 flex h-screen w-screen flex-col items-center justify-start overflow-visible'>
+            <IconContext.Provider
+                value={{
+                    className: isScrolled
+                        ? 'fixed top-0 left-0 z-20 bg-white w-full align-start h-14  flex justify-start pt-5 pb-5 pr-[87%]'
+                        : 'fixed top-0 left-0 z-20 bg-transparent w-full align-start h-14  flex justify-start pt-5 pb-5 pr-[87%]',
+                }}>
+                <div>
+                    <SlArrowLeft color={isScrolled ? 'black' : 'white'} />
+                </div>
+            </IconContext.Provider>
             <img
                 src='http://localhost:5173/img/Banner.png'
                 alt='designer'
-                className='h-2/5 w-full object-fill pb-20'
+                className='relative h-2/5 w-full object-cover'
             />
 
-            <div className='absolute bottom-0 h-4/5 w-full rounded-t-2xl bg-white shadow-md'>
+            <div className='relative z-10 -mt-20 w-full flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
                 <DesignerInfo />
                 <Divider />
-                <Calendar />
+                <Reservation />
+                <Divider />
+                {/*  비포 애프터 */}
+                <ButtonLg text='예약' />
             </div>
         </div>
     )
