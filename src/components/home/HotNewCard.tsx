@@ -3,10 +3,13 @@ import CheckIcon from '../../../public/img/check.svg'
 import Profile from './Profile'
 import DesignerImg from '../../../public/img/Banner.png'
 import Category from './Category'
+import { Link } from 'react-router-dom'
 
 export default function HotNewCard() {
     return (
-        <div className='w-150 py-18 border=[#eeeeee] flex h-fit flex-col items-center gap-13 rounded-8 bg-gray-100 shadow-[0_1px_12px_rgba(0,0,0,0.08)]'>
+        <Link
+            to='#'
+            className='mb-45 mt-14 flex h-[223px] w-150 shrink-0 flex-col items-center gap-13 rounded-8 border-[#eeeeee] bg-gray-100 py-18 shadow-[0_1px_12px_rgba(0,0,0,0.08)]'>
             <Profile size='lg' imgUrl={DesignerImg} />
             <div className='flex flex-col items-center gap-2'>
                 <span className='font-semibold text-black text-body1'>
@@ -26,6 +29,6 @@ export default function HotNewCard() {
                     <span className='text-body2 text-[#808080]'>리뷰 312</span>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
