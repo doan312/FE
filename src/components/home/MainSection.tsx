@@ -3,6 +3,7 @@ import Button from './Button'
 import Chip from './Chip'
 import DesignerCard from './DesignerCard'
 import MethodSelectionCard from './MethodSelectionCard'
+import RegionSectionButton from './RegionSectionButton'
 
 export default function MainSection() {
     return (
@@ -14,11 +15,14 @@ export default function MainSection() {
                 <MethodSelectionCard type='inPerson' />
                 <MethodSelectionCard type='online' />
             </div>
-            <div className='flex gap-6 mb-22'>
-                <Chip active value='전체'></Chip>
-                <Chip value='탈염색'></Chip>
-                <Chip value='염색'></Chip>
-                <Chip value='펌'></Chip>
+            <div className='flex items-center justify-between w-full mb-22'>
+                <div className='flex gap-6'>
+                    <Chip active value='전체'></Chip>
+                    <Chip value='탈염색'></Chip>
+                    <Chip value='염색'></Chip>
+                    <Chip value='펌'></Chip>
+                </div>
+                <RegionSectionButton />
             </div>
             <div className='flex flex-col gap-16 mb-16'>
                 <DesignerCard />
