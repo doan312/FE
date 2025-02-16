@@ -18,17 +18,6 @@ const Reservation: React.FC = () => {
                 selectedTime={selectedTime}
                 handleTimeClick={handleTimeClick}
             />
-            {/* 온오프라인 선택 */}
-            {selectedTime !== null && (
-                <div className='flex flex-row justify-between'>
-                    <button className='w-[48%] border-1 border-gray-500 bg-white text-gray-1300'>
-                        직접
-                    </button>
-                    <button className='w-[48%] border-1 border-gray-500 bg-white text-gray-1300'>
-                        온라인
-                    </button>
-                </div>
-            )}
         </div>
     )
 }
