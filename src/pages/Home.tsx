@@ -3,6 +3,7 @@
 import React from 'react'
 import Logo from '../components/home/Logo'
 import MethodSelectionCard from '../components/home/MethodSelectionCard'
+import Chip from '../components/home/Chip'
 
 const Home: React.FC = () => {
     return (
@@ -14,6 +15,12 @@ const Home: React.FC = () => {
             <div className='flex gap-11'>
                 <MethodSelectionCard type='inPerson' />
                 <MethodSelectionCard type='online' />
+            </div>
+            <div className='flex gap-6'>
+                <Chip active value='전체'></Chip>
+                <Chip value='탈염색'></Chip>
+                <Chip value='염색'></Chip>
+                <Chip value='펌'></Chip>
             </div>
         </div>
     )
