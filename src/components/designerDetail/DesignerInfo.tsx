@@ -42,7 +42,7 @@ const DesignerInfo: React.FC = () => {
                 </div>
                 <div className='flex flex-row'>
                     <img
-                        src='http://localhost:5173/img/star-on.svg'
+                        src={`${import.meta.env.VITE_CLIENT_URL}/img/star-on.svg`}
                         alt='star'
                     />
                     <div className='flex items-end text-body2 font-normal text-gray-1300'>
@@ -54,7 +54,7 @@ const DesignerInfo: React.FC = () => {
             {/* 코멘트 */}
             <div className='align-center flex w-full flex-row gap-[0.62rem] rounded-xl bg-neutral-100 pb-[0.875rem] pl-[0.75rem] pt-[0.875rem]'>
                 <img
-                    src='http://localhost:5173/img/logo-s-svg.svg'
+                    src={`${import.meta.env.VITE_CLIENT_URL}/img/logo-s-svg.svg`}
                     alt='logo'
                 />
                 <div className='flex w-4/5 items-end text-body2 font-normal text-gray-1300'>

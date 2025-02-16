@@ -40,7 +40,7 @@ const DesignerDetail: React.FC = () => {
                 </div>
             </IconContext.Provider>
             <img
-                src='http://localhost:5173/img/Banner.png'
+                src={`${import.meta.env.VITE_CLIENT_URL}/img/Banner.png`}
                 alt='designer'
                 className='relative h-2/5 w-full object-cover'
             />
