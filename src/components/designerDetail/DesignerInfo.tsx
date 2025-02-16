@@ -18,14 +18,14 @@ const DesignerInfo: React.FC = () => {
         },
     }
     return (
-        <div className='flex flex-col gap-16 p-5 pb-12'>
+        <div className='flex flex-col gap-16 p-[1.25rem] pb-12'>
             {/* 디자이너 정보 */}
-            <div className='flex flex-col gap-5'>
-                <div className='flex space-x-2'>
+            <div className='flex flex-col gap-[0.3rem]'>
+                <div className='flex gap-[0.3rem] space-x-2'>
                     {chips.map((chip, index) => (
                         <span
                             key={index}
-                            className='rounded-s p-1 pl-2 pr-2 text-caption font-normal'
+                            className='rounded-s p-[0.12rem] pl-[0.3rem] pr-[0.3rem] text-caption font-normal'
                             style={{
                                 backgroundColor: chip.bg,
                                 color: chip.textColor,
@@ -52,7 +52,7 @@ const DesignerInfo: React.FC = () => {
             </div>
 
             {/* 코멘트 */}
-            <div className='align-center flex w-full flex-row gap-2.5 rounded-xl bg-neutral-100 p-3'>
+            <div className='align-center flex w-full flex-row gap-[0.62rem] rounded-xl bg-neutral-100 pb-[0.875rem] pl-[0.75rem] pt-[0.875rem]'>
                 <img
                     src='http://localhost:5173/img/logo-s-svg.svg'
                     alt='logo'

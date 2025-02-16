@@ -32,8 +32,8 @@ const DesignerDetail: React.FC = () => {
             <IconContext.Provider
                 value={{
                     className: isScrolled
-                        ? 'fixed top-0 left-0 z-20 bg-white w-full align-start h-14  flex justify-start pt-5 pb-5 pr-[87%]'
-                        : 'fixed top-0 left-0 z-20 bg-transparent w-full align-start h-14  flex justify-start pt-5 pb-5 pr-[87%]',
+                        ? 'fixed top-0 left-0 z-20 bg-white w-full align-start h-[3.5625rem] flex justify-start pt-[1.25rem] pb-[1.25rem] pr-[87%]'
+                        : 'fixed top-0 left-0 z-20 bg-transparent w-full align-start h-[3.5625rem] pt-[1.25rem] pb-[1.25rem] pr-[87%] flex justify-start',
                 }}>
                 <div>
                     <SlArrowLeft color={isScrolled ? 'black' : 'white'} />

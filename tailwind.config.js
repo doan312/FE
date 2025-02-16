@@ -130,6 +130,9 @@ export default {
             screens: {
                 custom: '923px', // Adds a custom breakpoint at 1023px
             },
+            boxShadow: {
+                'slider': '0px 1px 5px 0px rgba(18, 19, 21, 0.10), 0px 2px 10px 0px rgba(18, 19, 21, 0.03)', 
+            },    
         },
     },
     plugins: [],

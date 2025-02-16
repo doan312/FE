@@ -4,7 +4,7 @@ import CustomCalendar from './CustomCalendar'
 import TimeSelectBar from './TimeSelectBar'
 const Reservation: React.FC = () => {
     return (
-        <div className='flex flex-col gap-20 p-5 pt-12'>
+        <div className='flex flex-col gap-[1.44rem] pb-[2.8rem] pl-[1.25rem] pr-[1.25rem] pt-[2.8rem]'>
             <div className='text-body1 font-bold text-gray-1300'>상담 예약</div>
             <ToggleButton />
             <CustomCalendar />
