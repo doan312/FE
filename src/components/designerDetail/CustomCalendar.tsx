@@ -22,8 +22,8 @@ const CustomCalendar: React.FC = () => {
                 calendarType='gregory'
                 view='month'
                 locale='ko'
-                formatMonthYear={(local, date) => dayjs(date).format('YYYY.MM')}
-                formatDay={(local, date) => dayjs(date).format('D')}
+                formatMonthYear={(_, date) => dayjs(date).format('YYYY.MM')}
+                formatDay={(_, date) => dayjs(date).format('D')}
                 onChange={handleSelect}
                 value={selectedDate}
                 minDate={new Date()} // 오늘 이전 날짜 선택 불가
