@@ -18,6 +18,8 @@ const DesignerDetail: React.FC = () => {
                 <DesignerInfo />
                 <Divider />
                 <Reservation />
+                <Divider />
+                {/*  비포 애프터 */}
             </div>
         </div>
     )
