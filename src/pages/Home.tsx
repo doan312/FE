@@ -6,15 +6,18 @@ import MainSection from '../components/home/MainSection'
 import Banner from '../components/home/Banner'
 import RescheduleBanner from '../components/home/RescheduleBanner'
 import HotNewSection from '../components/home/HotNewSection'
+import BeforeAfterSection from '../components/home/BeforeAfterSection'
 
 const Home: React.FC = () => {
     return (
-        <div className='h-[852px] w-full bg-gradient-to-b from-purple-50 to-gray-100 px-16'>
+        <div className='relative w-full px-16 pb-155'>
+            <div className='absolute left-0 right-0 top-0 -z-10 -m-16 h-[852px] bg-gradient-to-b from-purple-50 to-gray-100'></div>
             <Logo />
             <MainSection />
             <Banner />
             <RescheduleBanner />
             <HotNewSection />
+            <BeforeAfterSection />
         </div>
     )
 }

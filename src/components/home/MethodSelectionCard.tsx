@@ -21,7 +21,7 @@ interface Props {
 export default function MethodSelectionCard({ type }: Props) {
     const { copy, price, icon } = methodData[type]
     return (
-        <div className='w-166 h-150 relative rounded-lg border-[1.5px] border-purple-50 bg-gray-100 p-14'>
+        <div className='w-166 h-150 relative grow rounded-lg border-[1.5px] border-purple-50 bg-gray-100 p-14'>
             <div className='flex flex-col justify-between h-full'>
                 <span className='font-bold text-purple-800 whitespace-pre-wrap text-h4'>
                     {copy}
