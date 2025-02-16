@@ -17,7 +17,7 @@ export default function DesignerCard() {
                         <span className='font-semibold text-body1 text-gray-1300'>
                             박수연 실장
                         </span>
-                        <Rating rating={4.3} />
+                        <Rating rating={4.3} textColor='black' />
                     </div>
                     <span className='text-body2 text-[#939393]'>
                         준오헤어 반포점

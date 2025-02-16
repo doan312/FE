@@ -60,7 +60,6 @@ h1 {
     display: none;
 }
 
-.swiper-slide,
-.swiper-wrapper {
+.swiper-slide {
     width: auto !important;
 }
