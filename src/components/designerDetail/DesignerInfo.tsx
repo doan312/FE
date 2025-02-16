@@ -1,9 +1,12 @@
-//디자이너 상세 페이지(예약 정보 입력 페이지)
-
 import React from 'react'
 
 const DesignerInfo: React.FC = () => {
-    const chips = ['직접', '온라인', '염색전문']
+    const chips = [
+        { text: '직접', bg: '#FFECEC', textColor: '#FE6E81' },
+        { text: '온라인', bg: '#ECEFFF', textColor: '#6173FD' },
+        { text: '염색전문', bg: '#F5F5F5', textColor: '#8C8C8C' },
+        { text: 'D-DAY', bg: '#EEE5FF', textColor: '#732CF5' },
+    ]
     const designerInfo = {
         name: '박수연 실장',
         location: '준오헤어 반포점',
@@ -15,15 +18,19 @@ const DesignerInfo: React.FC = () => {
         },
     }
     return (
-        <div className='flex flex-col gap-16 p-5 pb-12'>
+        <div className='flex flex-col gap-16 p-[1.25rem] pb-12'>
             {/* 디자이너 정보 */}
-            <div className='flex flex-col gap-5'>
-                <div className='flex space-x-2'>
+            <div className='flex flex-col gap-[0.3rem]'>
+                <div className='flex gap-[0.3rem] space-x-2'>
                     {chips.map((chip, index) => (
                         <span
                             key={index}
-                            className='rounded-full bg-gray-200 px-2 py-1 text-xs text-[#fe6d81]'>
-                            {chip}
+                            className='rounded-s p-[0.12rem] pl-[0.3rem] pr-[0.3rem] text-caption font-normal'
+                            style={{
+                                backgroundColor: chip.bg,
+                                color: chip.textColor,
+                            }}>
+                            {chip.text}
                         </span>
                     ))}
                 </div>
@@ -45,7 +52,7 @@ const DesignerInfo: React.FC = () => {
             </div>
 
             {/* 코멘트 */}
-            <div className='align-center flex w-full flex-row gap-2.5 rounded-xl bg-neutral-100 p-3'>
+            <div className='align-center flex w-full flex-row gap-[0.62rem] rounded-xl bg-neutral-100 pb-[0.875rem] pl-[0.75rem] pt-[0.875rem]'>
                 <img
                     src='http://localhost:5173/img/logo-s-svg.svg'
                     alt='logo'
