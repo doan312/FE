@@ -80,3 +80,8 @@ button {
 *::-webkit-scrollbar {
     display: none;
 }
+
+.swiper-slide,
+.swiper-wrapper {
+    width: auto !important;
+}
