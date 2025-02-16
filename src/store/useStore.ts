@@ -25,6 +25,7 @@ export const useTabStore = create(
             return {
                 setCurrentTab: (to: TabType) => {
                     set({
+                    set({
                         currentTab: to,
                     })
                 },
