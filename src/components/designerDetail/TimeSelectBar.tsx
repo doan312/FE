@@ -24,8 +24,10 @@ const TimeSelectBar: React.FC = () => {
                 <button
                     key={index}
                     onClick={() => handleTimeClick(time)}
-                    className={`h-9 min-w-75 rounded-xl border-1 border-gray-500 bg-white p-2 text-center text-caption font-normal text-gray-1300 transition ${
-                        selectedTime === time ? 'bg-purple-300 text-white' : ''
+                    className={`h-9 min-w-75 rounded-xl p-2 text-center text-caption font-normal text-gray-1300 transition ${
+                        selectedTime === time
+                            ? 'border-none bg-purple-300 text-white'
+                            : 'border-1 border-gray-500 bg-white'
                     }`}>
                     {time}
                 </button>
