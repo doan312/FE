@@ -1,4 +1,3 @@
-import TabBar from '../TabBar/TabBar'
 import Button from './Button'
 import Chip from './Chip'
 import DesignerCard from './DesignerCard'
@@ -32,7 +31,6 @@ export default function MainSection() {
                 <DesignerCard />
             </div>
             <Button />
-            <TabBar />
         </div>
     )
 }

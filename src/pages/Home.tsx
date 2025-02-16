@@ -7,6 +7,7 @@ import Banner from '../components/home/Banner'
 import RescheduleBanner from '../components/home/RescheduleBanner'
 import HotNewSection from '../components/home/HotNewSection'
 import BeforeAfterSection from '../components/home/BeforeAfterSection'
+import TabBar from '../components/TabBar/TabBar'
 
 const Home: React.FC = () => {
     return (
@@ -18,6 +19,7 @@ const Home: React.FC = () => {
             <RescheduleBanner />
             <HotNewSection />
             <BeforeAfterSection />
+            <TabBar />
         </div>
     )
 }
