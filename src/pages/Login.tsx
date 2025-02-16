@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { useGetIdToken } from '../apis/api/get/useGetIdToken'
 import { useLogin } from '../apis/api/post/useLogin'
+import { ClipLoader } from 'react-spinners'
 
 const Login: React.FC = () => {
     const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_GOOGLE_LOGIN_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_GOOGLE_LOGIN_REDIRECT_URI}&scope=openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code`
@@ -25,13 +26,28 @@ const Login: React.FC = () => {
     //idToken 받아오기
     useEffect(() => {
         if (res.isSuccess && res.data !== null) {
-            login.mutate(res.data.data.data.idToken) //로그인 처리
+            login.mutate(res.data.data.data.idToken) //로그인 or 회원가입 처리
         }
     }, [res.isSuccess])
 
+    //로그인 로딩 화면
+    if (code !== '') {
+        return (
+            <div className='relative flex h-screen w-screen flex-col items-center justify-center gap-[2rem] bg-gradient-to-b from-[#d8c4fc] to-white'>
+                <span className='text-h2 font-normal text-gray-900'>
+                    Loading...
+                </span>
+                <div className='flex flex-col items-center justify-center'>
+                    <ClipLoader color='#894ef7' loading={true} size={50} />
+                </div>
+            </div>
+        )
+    }
+
+    //랜딩 화면
     return (
         <div className='relative flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-[#d8c4fc] to-white'>
-            <div className='flex flex-col items-center justify-center'>
+            <div className='flex flex-col items-center justify-center gap-[1rem]'>
                 <img
                     src={`${import.meta.env.VITE_CLIENT_URL}/img/Logo-l.svg`}
                     alt='logo'

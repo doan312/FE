@@ -2,10 +2,12 @@ import { useMutation } from '@tanstack/react-query';
 import { baseApi } from '../..';
 import { useAccessTokenStore } from '../../../store/useStore';
 import { useSignUp } from './useSignup';
+import { useNavigate } from 'react-router-dom';
 
 export const useLogin = () => {
   const {setAccessToken} = useAccessTokenStore() 
   const signup = useSignUp();
+  const navigate = useNavigate();
   const mutation = useMutation({
     mutationKey: ['login'],
     mutationFn: async (idToken: string) => {
@@ -20,6 +22,8 @@ export const useLogin = () => {
       if(data.data.isRegistered){
         //accessToken저장
         setAccessToken(data.data.accessToken)
+        //home으로
+        navigate('/home')
       }else{
         signup.mutate(idToken)
       }
