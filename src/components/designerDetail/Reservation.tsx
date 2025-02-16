@@ -2,7 +2,6 @@ import React from 'react'
 import ToggleButton from './ToggleButton'
 import CustomCalendar from './CustomCalendar'
 import TimeSelectBar from './TimeSelectBar'
-import ButtonLg from './ButtonLg'
 const Reservation: React.FC = () => {
     return (
         <div className='flex flex-col gap-20 p-5 pt-12'>
@@ -10,8 +9,6 @@ const Reservation: React.FC = () => {
             <ToggleButton />
             <CustomCalendar />
             <TimeSelectBar />
-
-            <ButtonLg text='예약' />
         </div>
     )
 }
