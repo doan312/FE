@@ -5,6 +5,10 @@
     font-family: Pretendard, sans-serif;
     line-height: 1.125em;
     color: #111;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .react-calendar--doubleView {
@@ -42,9 +46,12 @@
 
 .react-calendar__navigation {
     display: flex;
-    height: 44px;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
     color: #111;
+    width: 35%;
+
+    text-align: center;
 
     /* Haertz/Body 1/Semibold */
     font-family: Pretendard;
@@ -55,12 +62,14 @@
 }
 
 .react-calendar__navigation button {
-    min-width: 44px;
+    /* min-width: 44px; */
+    padding: 0;
     background: none;
 }
 
 .react-calendar__navigation button:disabled {
-    background-color: #f0f0f0;
+    color: #d9d9d9;
+    background: none;
 }
 
 .react-calendar__navigation button:enabled:hover,
@@ -126,8 +135,8 @@
 }
 
 .react-calendar__tile:disabled {
-    background-color: #f0f0f0;
-    color: #ababab;
+    color: #d9d9d9;
+    background: none;
 }
 
 .react-calendar__month-view__days__day--neighboringMonth:disabled,

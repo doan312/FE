@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Calendar from 'react-calendar'
 import '../../styles/calendar.css'
 import dayjs from 'dayjs'
+import { SlArrowLeft, SlArrowRight } from 'react-icons/sl'
 
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
@@ -12,6 +13,9 @@ const CustomCalendar: React.FC = () => {
         console.log(value)
         setSelectedDate(value)
     }
+    //선택 가능한 maxDate 설정
+    const threeMonthLater = dayjs().add(3, 'month').endOf('month').toDate()
+
     return (
         <div>
             <Calendar
@@ -22,6 +26,10 @@ const CustomCalendar: React.FC = () => {
                 formatDay={(local, date) => dayjs(date).format('D')}
                 onChange={handleSelect}
                 value={selectedDate}
+                minDate={new Date()} // 오늘 이전 날짜 선택 불가
+                maxDate={threeMonthLater} // 3개월 이후 날짜 선택 불가
+                prevLabel={<SlArrowLeft />}
+                nextLabel={<SlArrowRight />}
                 prev2Label={null}
                 next2Label={null}
                 showNeighboringMonth={false}
