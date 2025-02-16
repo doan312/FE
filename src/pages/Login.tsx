@@ -1,18 +1,27 @@
 //로그인
 
-import React from "react";
+import React from 'react'
 
 const Login: React.FC = () => {
-  return (
-    <div className="flex justify-center items-center min-h-screen w-screen bg-gray-100 p-4">
-      <div className="flex flex-col md:flex-row w-full max-w-7xl max-h-screen bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
-        <div className="md:w-1/2 p-6 md:p-8 lg:p-10 text-left flex flex-col justify-center">
-          <p className="text-5xl font-bold text-blue-600">test</p>
-          <p className="text-lg text-gray-600">test</p>
-        </div>
-      </div>
-    </div>
-  );
-};
+    return (
+        <div className='relative flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-[#d8c4fc] to-white'>
+            <div className='flex flex-col items-center justify-center'>
+                <img
+                    src='http://localhost:5173/img/Logo-l.svg'
+                    alt='logo'
+                    className='relative h-[2.1876rem] object-cover'
+                />
+                <div className="font-['Bellota Text'] text-base font-normal text-[#894ef7]">
+                    Style That Speaks, Beauty That Lasts
+                </div>
+            </div>
 
-export default Login;
+            <button className='absolute bottom-[1.88rem] flex h-[3rem] w-[80%] flex-row items-center justify-center gap-[0.25rem] rounded-[0.625rem]'>
+                <img src='http://localhost:5173/img/google.svg' alt='google' />
+                <span className='text-body1 font-normal'>구글로 시작하기 </span>
+            </button>
+        </div>
+    )
+}
+
+export default Login
