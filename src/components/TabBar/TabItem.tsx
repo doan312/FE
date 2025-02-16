@@ -33,7 +33,11 @@ export default function TabItem({ type }: Props) {
             type='button'
             className='flex flex-col items-center gap-2 bg-transparent'
             onClick={() => setCurrentTab(type)}>
-            <img src={isActive ? activeIcon : inactiveIcon} alt='탭 아이콘' />
+            <img
+                src={isActive ? activeIcon : inactiveIcon}
+                alt='탭 아이콘'
+                className='w-24 h-24'
+            />
             <span
                 className={`text-caption font-medium ${isActive ? 'text-purple-500' : 'text-[#ADB5BD]'}`}>
                 {tabItemData[type].text}

@@ -1,5 +1,6 @@
 import Profile from './Profile'
 import DesignerImg from '../../../public/img/Banner.png'
+import { Link } from 'react-router-dom'
 
 export default function RescheduleBanner() {
     return (
@@ -13,9 +14,11 @@ export default function RescheduleBanner() {
                     재예약은 어떠세요?
                 </span>
             </div>
-            <button className='flex items-center justify-center px-10 py-5 font-medium text-gray-100 bg-purple-500 rounded-50 text-body2'>
+            <Link
+                to='#'
+                className='flex items-center justify-center px-10 py-5 font-medium text-gray-100 bg-purple-500 rounded-50 text-body2'>
                 재예약
-            </button>
+            </Link>
         </div>
     )
 }

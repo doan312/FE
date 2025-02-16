@@ -9,8 +9,6 @@ export default function BannerSwiper() {
             spaceBetween={12}
             slidesPerView={1}
             centeredSlides={true}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
             grabCursor={true}
             autoplay={{
                 delay: 3000,

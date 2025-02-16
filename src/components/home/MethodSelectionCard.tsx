@@ -1,5 +1,6 @@
 import InPersonIcon from '../../../public/img/in-person.svg'
 import OnlineIcon from '../../../public/img/online.svg'
+import { useHomeStore } from '../../store/useStore'
 
 const methodData = {
     inPerson: {
@@ -14,15 +15,23 @@ const methodData = {
     },
 }
 
+export type CounselType = 'inPerson' | 'online'
+
 interface Props {
-    type: 'inPerson' | 'online'
+    type: CounselType
 }
 
 export default function MethodSelectionCard({ type }: Props) {
+    const { counselType, setCounselType } = useHomeStore()
     const { copy, price, icon } = methodData[type]
+    const isActive = type === counselType
+
     return (
-        <div className='w-166 h-150 relative grow rounded-lg border-[1.5px] border-purple-50 bg-gray-100 p-14'>
-            <div className='flex flex-col justify-between h-full'>
+        <button
+            type='button'
+            className={`relative h-150 w-166 grow rounded-lg border-[1.5px] border-purple-50 p-14 ${isActive ? 'bg-purple-50' : 'bg-gray-100'}`}
+            onClick={() => setCounselType(type)}>
+            <div className='flex flex-col justify-between h-full text-left'>
                 <span className='font-bold text-purple-800 whitespace-pre-wrap text-h4'>
                     {copy}
                 </span>
@@ -38,6 +47,6 @@ export default function MethodSelectionCard({ type }: Props) {
                 alt={`${type} 아이콘`}
                 className='absolute bottom-0 right-0'
             />
-        </div>
+        </button>
     )
 }
