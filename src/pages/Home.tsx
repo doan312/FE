@@ -4,6 +4,7 @@ import React from 'react'
 import Logo from '../components/home/Logo'
 import MainSection from '../components/home/MainSection'
 import Banner from '../components/home/Banner'
+import RescheduleBanner from '../components/home/RescheduleBanner'
 
 const Home: React.FC = () => {
     return (
@@ -11,6 +12,7 @@ const Home: React.FC = () => {
             <Logo />
             <MainSection />
             <Banner />
+            <RescheduleBanner />
         </div>
     )
 }
