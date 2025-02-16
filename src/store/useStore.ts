@@ -24,13 +24,18 @@ export const useHomeStore = create(
     combine(
         {
             counselType: 'inPerson',
-            selectedChips: ['전체'],
+            isSheetOpen: false,
         },
-        (set) => {
+        (set, get) => {
             return {
                 setCounselType: (switchTo: CounselType) => {
                     set({
                         counselType: switchTo,
+                    })
+                },
+                toggleSheet: () => {
+                    set({
+                        isSheetOpen: !get().isSheetOpen,
                     })
                 },
             }

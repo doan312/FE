@@ -1,10 +1,14 @@
+import BottomSheet from './BottomSheet'
 import Button from './Button'
 import Chip from './Chip'
 import DesignerCard from './DesignerCard'
 import MethodSelectionCard from './MethodSelectionCard'
 import RegionSectionButton from './RegionSectionButton'
+import { useHomeStore } from '../../store/useStore'
 
 export default function MainSection() {
+    const { isSheetOpen } = useHomeStore()
+
     return (
         <div className='flex flex-col mb-44'>
             <h2 className='mb-16 font-bold text-h2 text-gray-1300'>
@@ -31,6 +35,7 @@ export default function MainSection() {
                 <DesignerCard />
             </div>
             <Button />
+            {isSheetOpen && <BottomSheet />}
         </div>
     )
 }
