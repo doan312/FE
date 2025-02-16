@@ -5,26 +5,28 @@ import { Autoplay } from 'swiper/modules'
 
 export default function BannerSwiper() {
     return (
-        <Swiper
-            spaceBetween={12}
-            slidesPerView={1}
-            centeredSlides={true}
-            grabCursor={true}
-            autoplay={{
-                delay: 3000,
-                disableOnInteraction: false,
-            }}
-            modules={[Autoplay]}
-            className='mb-44'>
-            <SwiperSlide>
-                <Banner />
-            </SwiperSlide>
-            <SwiperSlide>
-                <Banner />
-            </SwiperSlide>
-            <SwiperSlide>
-                <Banner />
-            </SwiperSlide>
-        </Swiper>
+        <div className='w-screen -ml-16 mb-44'>
+            <Swiper
+                spaceBetween={12}
+                slidesPerView='auto'
+                grabCursor={true}
+                centeredSlides={true}
+                loop={true}
+                autoplay={{
+                    delay: 3000,
+                    disableOnInteraction: false,
+                }}
+                modules={[Autoplay]}>
+                <SwiperSlide>
+                    <Banner />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <Banner />
+                </SwiperSlide>
+                <SwiperSlide>
+                    <Banner />
+                </SwiperSlide>
+            </Swiper>
+        </div>
     )
 }

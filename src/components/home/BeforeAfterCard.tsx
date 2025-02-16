@@ -14,7 +14,7 @@ export default function BeforeAfterCard() {
                 </span>
                 <div className='flex items-center gap-4 text-gray-100 text-body2'>
                     <span>김서연 디자이너</span>
-                    <Rating rating={4.7} />
+                    <Rating rating={4.7} textColor='white' />
                 </div>
                 <span className='text-caption text-[#e5e5e5]'>
                     이번이 두번재 예약인데 기억해주시더라구요!! 일단 감동하면서
