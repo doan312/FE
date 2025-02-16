@@ -1,5 +1,15 @@
-import React, { useState } from 'react'
-const TimeSelectBar: React.FC = () => {
+import React from 'react'
+
+interface TimeSelectBarProps {
+    selectedTime: string | null
+
+    handleTimeClick: (time: string) => void
+}
+
+const TimeSelectBar: React.FC<TimeSelectBarProps> = ({
+    selectedTime,
+    handleTimeClick,
+}) => {
     const timeTable = [
         '오전 12:00',
         '오후 12:30',
@@ -11,12 +21,6 @@ const TimeSelectBar: React.FC = () => {
         '오후 8:00',
         '오후 9:00',
     ]
-
-    const [selectedTime, setSelectedTime] = useState<string | null>(null)
-
-    const handleTimeClick = (time: string) => {
-        setSelectedTime(time)
-    }
 
     return (
         <div className='flex flex-row gap-[0.62rem] overflow-scroll'>
