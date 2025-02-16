@@ -5,6 +5,7 @@ import Logo from '../components/home/Logo'
 import MethodSelectionCard from '../components/home/MethodSelectionCard'
 import Chip from '../components/home/Chip'
 import DesignerCard from '../components/home/DesignerCard'
+import Button from '../components/home/Button'
 
 const Home: React.FC = () => {
     return (
@@ -23,7 +24,13 @@ const Home: React.FC = () => {
                 <Chip value='염색'></Chip>
                 <Chip value='펌'></Chip>
             </div>
-            <DesignerCard />
+            <div className='flex flex-col gap-16'>
+                <DesignerCard />
+                <DesignerCard />
+                <DesignerCard />
+                <DesignerCard />
+            </div>
+            <Button />
         </div>
     )
 }
