@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import NotFoundSVG from "../assets/icons/notfound.svg"; // SVG 파일 추가
+import NotFoundSVG from "../assets/icons/Network.svg"; // SVG 파일 추가
 import Header from "../utils/Header"; // 헤더 컴포넌트 import
 
-const NotFound: React.FC = () => {
+const NetworkError: React.FC = () => {
   const navigate = useNavigate();
 
   return (
@@ -17,20 +17,18 @@ const NotFound: React.FC = () => {
         <img src={NotFoundSVG} alt="페이지를 찾을 수 없음" className="w-[96px] h-[96px] mb-[16px]" />
 
         {/* 안내 문구 */}
-        <p className="text-gray-700 text-[14px] mb-[8px]">
-          잘못된 접근이거나 요청하신<br /> 페이지를 찾을 수 없습니다.
-        </p>
+        <p className="text-gray-700 text-[14px] mb-[8px]">인터넷 연결을 확인해보세요</p>
 
-        {/* 홈으로 이동 버튼 */}
+        {/* 새로고침 버튼 */}
         <button
           className="text-[#7E57C2] bg-transparent font-medium text-[18px] hover:underline"
-          onClick={() => navigate("/")} // "/"는 홈으로 이동
+          onClick={() => navigate(0)}
         >
-          홈으로 이동
+          새로고침
         </button>
       </div>
     </div>
   );
 };
 
-export default NotFound;
+export default NetworkError;

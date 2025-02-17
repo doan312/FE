@@ -16,7 +16,7 @@ const ReservationComplete = lazy(
 
 const NotFound = lazy(() => import('../pages/NotFound')) // 404 페이지
 const ServerError = lazy(() => import('../pages/SeverError')) // 500 페이지
-
+const NetworkError = lazy(() => import('../pages/NetworkError')) // 인터넷 연결 오류 페이지
 const Router = () => {
     const navigate = useNavigate()
 
@@ -53,7 +53,7 @@ const Router = () => {
                     element={<ReservationComplete />}
                 />
                 <Route path='/servererror' element={<ServerError />} />
-
+                <Route path='/networkerror' element={<NetworkError />} />
                 {/* 🔹 404 Not Found 라우트 */}
                 <Route path='*' element={<NotFound />} />
             </Routes>
