@@ -40,7 +40,7 @@ const Login: React.FC = () => {
         <div className='relative flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-[#d8c4fc] to-white'>
             <div className='flex flex-col items-center justify-center gap-[1rem]'>
                 <img
-                    src={`${import.meta.env.VITE_CLIENT_URL}/img/Logo-l.svg`}
+                    src={'/img/Logo-l.svg'}
                     alt='logo'
                     className='relative h-[2.1876rem] object-cover'
                 />
@@ -51,11 +51,8 @@ const Login: React.FC = () => {
 
             <button
                 onClick={handleGoogleLogin}
-                className='absolute bottom-[1.88rem] flex h-[3rem] w-[80%] flex-row items-center justify-center gap-[0.25rem] rounded-[0.625rem]'>
-                <img
-                    src={`${import.meta.env.VITE_CLIENT_URL}/img/google.svg`}
-                    alt='google'
-                />
+                className='absolute bottom-[1.88rem] flex h-[3rem] w-[80%] flex-row items-center justify-center gap-[0.25rem] rounded-[0.625rem] bg-gray-1300'>
+                <img src={'/img/google.svg'} alt='google' />
                 <span className='text-body1 font-normal'>구글로 시작하기 </span>
             </button>
         </div>
