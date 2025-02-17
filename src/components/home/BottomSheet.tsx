@@ -3,7 +3,11 @@ import CloseIcon from '../../../public/img/close.svg'
 import RadioItem from './RadioItem'
 import { useHomeStore } from '../../store/useStore'
 
-type Region = '서울 전체' | '강남/청담/압구정' | '홍대/연남/합정' | '성수/건대'
+export type Region =
+    | '서울 전체'
+    | '강남/청담/압구정'
+    | '홍대/연남/합정'
+    | '성수/건대'
 
 const regionList: Region[] = [
     '서울 전체',
@@ -13,8 +17,18 @@ const regionList: Region[] = [
 ]
 
 export default function BottomSheet() {
-    const [selectedRegion, setSelectedRegion] = useState('서울 전체')
-    const { isSheetOpen, toggleSheet } = useHomeStore()
+    const [selectedRegion, setSelectedRegion] = useState<Region>('서울 전체')
+    const { currentRegion, isSheetOpen, setCurrentRegion, toggleSheet } =
+        useHomeStore()
+
+    const isButtonActive = selectedRegion !== currentRegion
+    const buttonStyle = isButtonActive ? 'bg-gray-1200' : 'bg-gray-600'
+
+    const handleButtonClick = () => {
+        if (!isButtonActive) return
+        setCurrentRegion(selectedRegion)
+        toggleSheet()
+    }
 
     return (
         <div
@@ -41,7 +55,8 @@ export default function BottomSheet() {
             <div className='px-16 pt-10 h-88 border-t-1 border-t-gray-300 pb-30'>
                 <button
                     type='button'
-                    className='flex items-center justify-center w-full h-48 font-medium text-gray-100 bg-gray-600 rounded-10 text-body1'>
+                    onClick={handleButtonClick}
+                    className={`flex h-48 w-full items-center justify-center rounded-10 text-body1 font-medium text-gray-100 ${buttonStyle}`}>
                     적용
                 </button>
             </div>

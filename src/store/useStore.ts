@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { combine } from 'zustand/middleware'
 import { TabType } from '../components/TabBar/TabBar'
 import { CounselType } from '../components/home/MethodSelectionCard'
+import { Region } from '../components/home/BottomSheet'
 
 interface accessTokenStore {
     accessToken: string | null
@@ -37,6 +38,7 @@ export const useHomeStore = create(
         {
             counselType: 'inPerson',
             isSheetOpen: false,
+            currentRegion: '서울 전체',
         },
         (set, get) => {
             return {
@@ -48,6 +50,11 @@ export const useHomeStore = create(
                 toggleSheet: () => {
                     set({
                         isSheetOpen: !get().isSheetOpen,
+                    })
+                },
+                setCurrentRegion: (switchTo: Region) => {
+                    set({
+                        currentRegion: switchTo,
                     })
                 },
             }
