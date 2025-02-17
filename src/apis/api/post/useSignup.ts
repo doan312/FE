@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { baseApi } from '../..';
 import { useAccessTokenStore } from '../../../store/useStore';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie'
 
 
 export const useSignUp = () => {
@@ -19,10 +20,12 @@ export const useSignUp = () => {
     onSuccess(data) {
       console.log('api success', data);
       if(data.data.isRegistered){
-        //accessToken저장
+        //accessToken 저장
         setAccessToken(data.data.accessToken)
+        //refreshToken cookie 저장
+        console.log('리프레시 쿠키',Cookies.get('refreshToken')) 
         //home으로
-        navigate('/home')
+        navigate('/')
       }
     }});
     return mutation;

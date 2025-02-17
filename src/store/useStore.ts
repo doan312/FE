@@ -3,18 +3,24 @@ import { combine } from 'zustand/middleware'
 import { TabType } from '../components/TabBar/TabBar'
 import { CounselType } from '../components/home/MethodSelectionCard'
 import { Region } from '../components/home/BottomSheet'
+import { persist } from 'zustand/middleware'
 
 interface accessTokenStore {
     accessToken: string | null
     setAccessToken: (token: string) => void
-    clearAccessToken: () => void
 }
 
-export const useAccessTokenStore = create<accessTokenStore>((set) => ({
-    accessToken: null,
-    setAccessToken: (token) => set({ accessToken: token }),
-    clearAccessToken: () => set({ accessToken: null }),
-}))
+export const useAccessTokenStore = create<accessTokenStore>()(
+    persist(
+        (set) => ({
+            accessToken: null,
+            setAccessToken: (token) => set({ accessToken: token }),
+        }),
+        {
+            name: 'access-token-storage',
+        }
+    )
+)
 
 export const useTabStore = create(
     combine(
