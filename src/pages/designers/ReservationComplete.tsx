@@ -1,4 +1,4 @@
-import React, { useEffect, useState  } from "react";
+import React, { useEffect } from "react";
 import PaymentInfo from "../../components/reservationcompletes/PaymentInfo"; // 결제 정보 컴포넌트
 import ReservationInfo from "../../components/reservationcompletes/ReservationInfo"; // 예약 정보 컴포넌트
 import ReservationCompleteIcon from "../../assets/icons/Reservation complete.svg"; // 상대 경로
@@ -18,20 +18,7 @@ const ReservationComplete: React.FC = () => {
       console.log("📢 결제 방식:", paymentMethod);
     }, [paymentMethod]);
 
-    const [showToast, setShowToast] = useState(false);
-
-  const copyAccountNumber = () => {
-    navigator.clipboard.writeText("000-0000-000");
-
-    // 토스트 메시지를 표시
-    setShowToast(true);
-
-    // 2초 후 사라지도록 설정
-    setTimeout(() => {
-      setShowToast(false);
-    }, 2000);
-  };
- 
+    
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white px-6 py-10 pb-24">
