@@ -23,7 +23,7 @@ const ReservationComplete: React.FC = () => {
       {/* SVG 아이콘 적용 */}
       <div className="relative w-[64px] h-[64px] mb-[24px] flex flex-col items-center justify-end">
         {/* Lottie 애니메이션 (아래쪽으로 정렬) */}
-        <div className="w-[88px] h-[88px] opacity-70">
+        <div className="w-[88px] h-[88px] opacity-70 pb-[180px]">
           <Lottie animationData={heartAnimation} loop={false} />
         </div>
 
