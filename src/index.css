@@ -36,19 +36,6 @@ h1 {
     line-height: 1.1;
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        color: #213547;
-        background-color: #ffffff;
-    }
-    a:hover {
-        color: #747bff;
-    }
-    button {
-        background-color: #f9f9f9;
-    }
-}
-
 /* 모든 요소에서 스크롤바 숨기기 */
 * {
     -ms-overflow-style: none; /* IE and Edge */
