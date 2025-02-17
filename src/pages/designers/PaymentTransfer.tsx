@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import PaymentModal from '../../components/paymenttransfers/PaymentModal'
 import InfoForm from '../../components/paymenttransfers/InfoForm' // 분리된 폼 컴포넌트 import

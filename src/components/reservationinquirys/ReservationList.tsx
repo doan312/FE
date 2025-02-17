@@ -9,7 +9,7 @@ interface Reservation {
   location: string;
   status: "결제 완료" | "입금 확인중" | "상담 완료" | "상담 취소";
   online: boolean;
-  type: "직접" | "온라인"; // 추가된 필드
+  type: "직접" | "온라인";
 }
 
 interface Props {
@@ -24,7 +24,7 @@ const ReservationList: React.FC<Props> = ({ reservations, title }) => {
 
   return (
     <section>
-      <h3 className="text-lg font-bold mb-2 text-black">{title}</h3>
+      <h3 className="text-[19px] font-bold mb-[8px] text-black">{title}</h3>
       {reservations.map((res) => (
         <ReservationCard key={res.id} reservation={res} />
       ))}
