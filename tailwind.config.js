@@ -1,17 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 
-const pxToRem = (px, base = 16) => `${px / base}rem`
-
-const pxr0_10 = Object.fromEntries(
-    Array.from({ length: 11 }, (_, i) => [i, pxToRem(i)])
+const px0_10 = Object.fromEntries(
+    Array.from({ length: 11 }, (_, i) => [i.toString(), `${i}px`])
 )
-
-const pxr0_100 = Object.fromEntries(
-    Array.from({ length: 101 }, (_, i) => [i, pxToRem(i)])
+const px0_100 = Object.fromEntries(
+    Array.from({ length: 101 }, (_, i) => [i.toString(), `${i}px`])
 )
-
-const pxr0_200 = Object.fromEntries(
-    Array.from({ length: 201 }, (_, i) => [i, pxToRem(i)])
+const px0_200 = Object.fromEntries(
+    Array.from({ length: 201 }, (_, i) => [i.toString(), `${i}px`])
 )
 
 export default {
@@ -64,19 +60,23 @@ export default {
                     '12px',
                     { lineHeight: '140%', letterSpacing: '-0.5%' },
                 ],
-                ...pxr0_100,
+                ...px0_100,
             },
             fontFamily: {
                 sans: ['Roboto', 'sans-serif'],
             },
-            borderWidth: pxr0_10,
-            borderRadius: pxr0_100,
-            lineHeight: pxr0_100,
-            minWidth: pxr0_200,
-            minHeight: pxr0_200,
-            spacing: pxr0_200,
-            inset: pxr0_100,
-            gap: pxr0_100,
+            borderWidth: px0_10,
+            borderRadius: px0_100,
+            lineHeight: px0_100,
+            minWidth: px0_200,
+            minHeight: px0_200,
+            maxWidth: px0_200,
+            maxHeight: px0_200,
+            width: px0_200,
+            height: px0_200,
+            spacing: px0_200,
+            inset: px0_100,
+            gap: px0_100,
             backgroundImage: {
                 'gradient-to-t':
                     'linear-gradient(to top, rgba(75, 75, 75, 0) 0%, rgba(120, 120, 120, 1) 100%)',
@@ -109,26 +109,10 @@ export default {
             },
             animation: {
                 fadeIn: 'fadeIn 1s ease-out',
-            },
-            height: {
-                50: '200px', // lg 화면
-                75: '250px', // md 화면
-                100: '275px', // 기본값
-            },
-            spacing: {
-                '15vh': '17vh',
-                '20vh': '20vh',
-            },
-            width: {
-                'screen-60': '60vw', // 화면 너비의 60%
-            },
-            animation: {
                 'bounce-200': 'bounce 1s infinite 200ms', // 200ms 지연
                 'bounce-400': 'bounce 1s infinite 400ms', // 400ms 지연
                 'bounce-600': 'bounce 1s infinite 600ms', // 600ms 지연
                 'bounce-800': 'bounce 1s infinite 800ms', // 800ms 지연
-            },
-            animation: {
                 'slide-out': 'slideOut 1s forwards',
                 'slide-in': 'slideIn 1s forwards',
             },
@@ -146,6 +130,9 @@ export default {
             screens: {
                 custom: '923px', // Adds a custom breakpoint at 1023px
             },
+            boxShadow: {
+                'slider': '0px 1px 5px 0px rgba(18, 19, 21, 0.10), 0px 2px 10px 0px rgba(18, 19, 21, 0.03)', 
+            },    
         },
     },
     plugins: [],

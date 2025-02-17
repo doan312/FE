@@ -1,18 +1,65 @@
-//로그인
-
-import React from "react";
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useGetIdToken } from '../apis/api/get/useGetIdToken'
+import { useLogin } from '../apis/api/post/useLogin'
+import { Loading } from './Loading'
 
 const Login: React.FC = () => {
-  return (
-    <div className="flex justify-center items-center min-h-screen w-screen bg-gray-100 p-4">
-      <div className="flex flex-col md:flex-row w-full max-w-7xl max-h-screen bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
-        <div className="md:w-1/2 p-6 md:p-8 lg:p-10 text-left flex flex-col justify-center">
-          <p className="text-5xl font-bold text-blue-600">test</p>
-          <p className="text-lg text-gray-600">test</p>
-        </div>
-      </div>
-    </div>
-  );
-};
+    const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${import.meta.env.VITE_GOOGLE_LOGIN_CLIENT_ID}&redirect_uri=${import.meta.env.VITE_GOOGLE_LOGIN_REDIRECT_URI}&scope=openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile&response_type=code`
+    const location = useLocation()
+    const [code, setCode] = useState('')
+    //로그인 api 호출
+    const res = useGetIdToken(code)
+    const login = useLogin()
 
-export default Login;
+    const handleGoogleLogin = () => {
+        window.location.href = googleLoginUrl
+    }
+
+    //로그인 callback처리
+    useEffect(() => {
+        if (location.search.includes('code')) {
+            setCode(location.search.split('=')[1])
+        }
+    }, [location])
+
+    //idToken 받아오기
+    useEffect(() => {
+        if (res.isSuccess && res.data !== null) {
+            login.mutate(res.data.data.data.idToken) //로그인 or 회원가입 처리
+        }
+    }, [res.isSuccess])
+
+    //로그인 로딩 화면
+    if (code !== '') {
+        return <Loading />
+    }
+
+    //랜딩 화면
+    return (
+        <div className='relative flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-[#d8c4fc] to-white'>
+            <div className='flex flex-col items-center justify-center gap-[1rem]'>
+                <img
+                    src={`${import.meta.env.VITE_CLIENT_URL}/img/Logo-l.svg`}
+                    alt='logo'
+                    className='relative h-[2.1876rem] object-cover'
+                />
+                <div className="font-['Bellota Text'] text-base font-normal text-[#894ef7]">
+                    Style That Speaks, Beauty That Lasts
+                </div>
+            </div>
+
+            <button
+                onClick={handleGoogleLogin}
+                className='absolute bottom-[1.88rem] flex h-[3rem] w-[80%] flex-row items-center justify-center gap-[0.25rem] rounded-[0.625rem]'>
+                <img
+                    src={`${import.meta.env.VITE_CLIENT_URL}/img/google.svg`}
+                    alt='google'
+                />
+                <span className='text-body1 font-normal'>구글로 시작하기 </span>
+            </button>
+        </div>
+    )
+}
+
+export default Login
