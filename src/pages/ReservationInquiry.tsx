@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ReservationList from "../components/reservationinquirys/ReservationList";
 import ConsultationAlert from "../components/reservationinquirys/ConsultationAlert";
 import Header from "../utils/Header"; // 헤더 컴포넌트 import
+import TabBar from '../components/TabBar/TabBar'
 interface Reservation {
   id: number;
   name: string;
@@ -69,15 +70,14 @@ const ReservationInquiry: React.FC = () => {
   }, [isLoading]);
 
   return (
-    <div className="flex flex-col items-center min-h-screen w-screen bg-white">
+    <div className="flex flex-col items-center min-h-[100vh] w-[100vw] bg-white">
       {/* 헤더 (고정된 위치) */}
-      {/* 헤더 컴포넌트 추가 */}
       <Header />
-
+      <TabBar />
       {/* 콘텐츠를 헤더 높이만큼 아래로 이동 */}
-      <div className="w-full max-w-3xl p-5 mt-16">
+      <div className="w-full max-w-[768px] p-[20px] mt-[64px]">
         {/* 헤더 아래 알림 컴포넌트 */}
-        <div className="mb-12">
+        <div className="mb-[48px]">
           <ConsultationAlert
             designerName="박수연 실장"
             consultationType="헤어 스타일링"
@@ -86,20 +86,19 @@ const ReservationInquiry: React.FC = () => {
         </div>
 
         {/* 다가오는 예약 (무한 스크롤 적용 X) */}
-        <div className="mb-12">
+        <div className="mb-[48px]">
           <ReservationList reservations={reservations} title="다가오는 예약" />
         </div>
 
         {/* 지난 컨설팅 (무한 스크롤 적용) */}
         <ReservationList reservations={pastReservations} title="지난 컨설팅" />
 
-
-          {/* 로딩 인디케이터 */}
-<div ref={loaderRef} className="flex justify-center items-center py-4">
-  {isLoading && (
-    <div className="animate-[spin_1s_linear_reverse_infinite] rounded-full h-7 w-7 border-4 border-gray-300 border-t-purple-300"></div>
-  )}
-</div>
+        {/* 로딩 인디케이터 */}
+        <div ref={loaderRef} className="flex justify-center items-center py-[16px]">
+          {isLoading && (
+            <div className="animate-[spin_1s_linear_reverse_infinite] rounded-full h-[28px] w-[28px] border-[4px] border-gray-300 border-t-purple-300"></div>
+          )}
+        </div>
       </div>
     </div>
   );
