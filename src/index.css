@@ -19,6 +19,14 @@
     display: none;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background: #262626;
+}
+
 .swiper-slide {
     width: auto !important;
 }
