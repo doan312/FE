@@ -103,19 +103,19 @@ const ReservationCard: React.FC<{ reservation: Reservation }> = ({ reservation }
         <div className="mt-4 text-base bg-gray-200 p-3 rounded-lg">
        {/* 날짜 */}
        <p className="text-gray-950 flex items-center gap-2 mb-0.5">
-        <CalendarIcon className="w-5 h-5 text-gray-600 mr-1" title="날짜" />
+        <CalendarIcon className="w-5 h-5 text-gray-700 mr-1" title="날짜" />
         {reservation.date} ({new Date(reservation.date).toLocaleDateString("ko-KR", { weekday: "short" })})
       </p>
 
       {/* 시간 */}
       <p className="text-gray-950 flex items-center gap-2 mb-0.5">
-        <ClockIcon className="w-5 h-5 text-gray-600 mr-1" title="시간" />
+        <ClockIcon className="w-5 h-5 text-gray-700 mr-1" title="시간" />
         {reservation.time}
       </p>
 
       {/* 위치 */}
       <p className="text-gray-950 flex items-center gap-2 mb-0.5">
-        <MapPinIcon className="w-5 h-5 text-gray-600 mr-1" title="위치" />
+        <MapPinIcon className="w-5 h-5 text-gray-700 mr-1" title="위치" />
         {reservation.location}
         {/* 복사 아이콘 */}
         <ClipboardIcon

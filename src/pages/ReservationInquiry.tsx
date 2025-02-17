@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReservationList from "../components/reservationinquirys/ReservationList";
-import Logo from "../assets/Logo.svg"; // 로고 파일 import
 import ConsultationAlert from "../components/reservationinquirys/ConsultationAlert";
-
+import Header from "../utils/Header"; // 헤더 컴포넌트 import
 interface Reservation {
   id: number;
   name: string;
@@ -72,12 +71,11 @@ const ReservationInquiry: React.FC = () => {
   return (
     <div className="flex flex-col items-center min-h-screen w-screen bg-white">
       {/* 헤더 (고정된 위치) */}
-      <header className="w-full fixed top-0 left-0 bg-white flex items-center py-6 px-6 z-50">
-        <img src={Logo} alt="로고" className="h-6" /> {/* 로고 왼쪽 정렬 */}
-      </header>
+      {/* 헤더 컴포넌트 추가 */}
+      <Header />
 
       {/* 콘텐츠를 헤더 높이만큼 아래로 이동 */}
-      <div className="w-full max-w-3xl p-6 mt-16">
+      <div className="w-full max-w-3xl p-5 mt-16">
         {/* 헤더 아래 알림 컴포넌트 */}
         <div className="mb-12">
           <ConsultationAlert
