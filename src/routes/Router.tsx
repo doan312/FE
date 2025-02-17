@@ -1,3 +1,4 @@
+
 import { lazy, Suspense, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
@@ -14,10 +15,12 @@ const ReservationComplete = lazy(() => import("../pages/designers/ReservationCom
 const NotFound = lazy(() => import("../pages/NotFound")); // 404 페이지
 const ServerError = lazy(() => import("../pages/SeverError")); // 500 페이지
 
+
 // 로딩 중 표시할 컴포넌트
-const Loading = () => <div className="loading">Loading...</div>;
+const Loading = () => <div className='loading'>Loading...</div>
 
 const Router = () => {
+
   const navigate = useNavigate();
 
   useEffect(() => {
