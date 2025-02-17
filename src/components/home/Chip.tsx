@@ -15,7 +15,7 @@ export default function Chip({ active = false, value }: Props) {
         <button
             type='button'
             onClick={() => setSelected(!selected)}
-            className={`rounded-30 px-10 py-6 text-body2 font-medium shadow-[0_0_4px_0_rgba(0,0,0,0.03)] hover:outline-none ${style}`}>
+            className={`rounded-30 px-10 py-6 text-body2 font-medium shadow-[0_0_4px_0_rgba(0,0,0,0.03)] transition duration-200 ease-in-out hover:outline-none ${style}`}>
             {value}
         </button>
     )
