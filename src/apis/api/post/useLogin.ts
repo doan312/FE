@@ -23,7 +23,7 @@ export const useLogin = () => {
         //accessToken저장
         setAccessToken(data.data.accessToken)
         //home으로
-        navigate('/home')
+        navigate('/')
       }else{
         signup.mutate(idToken)
       }
