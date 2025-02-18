@@ -1,36 +1,44 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdContentCopy } from 'react-icons/md'
 import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
 
-const DesignerInfo: React.FC = () => {
+interface DesignerInfoProps {
+    handleCopyLoc: (shop: string) => void
+}
+
+const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
     const chips = [
         { text: '직접', bg: '#FFECEC', textColor: '#FE6E81' },
         { text: '온라인', bg: '#ECEFFF', textColor: '#6173FD' },
         { text: '염색전문', bg: '#F5F5F5', textColor: '#8C8C8C' },
         { text: 'D-DAY', bg: '#EEE5FF', textColor: '#732CF5' },
     ]
-    const designerInfo = {
-        name: '박수연 실장',
-        location: '준오헤어 반포점',
-        rate: '4.7',
-        comment: '가치를 높여주는 이상적인 스타일을 찾아 드려요',
-        price: {
-            offline: '30,000',
-            online: '20,000',
-        },
-    }
+    const [designerInfo, setDesignerInfo] = useState({
+        name: '',
+        location: '',
+        rate: '',
+        comment: '',
+        price: { offline: '', online: '' },
+    })
+
     // 디자이너 정보 받아오기
     const designerData = useGetDesignerInfo()
     useEffect(() => {
         if (designerData.isSuccess) {
-            console.log(designerData.data)
+            const data = designerData.data.data.data
+            setDesignerInfo({
+                name: data.designerName,
+                location: data.designerShop,
+                rate: '4.7',
+                comment: data.designerDescription,
+                price: {
+                    offline: data.designerContactCost,
+                    online: data.designerUntactCost,
+                },
+            })
         }
     }, [designerData.isSuccess])
 
-    // 주소 복사 기능
-    const handleCopyLoc = () => {
-        // navigator.clipboard.writeText(designerInfo.location)
-    }
     return (
         <div className='flex flex-col gap-16 p-[1.25rem] pb-12'>
             {/* 디자이너 정보 */}
@@ -53,7 +61,9 @@ const DesignerInfo: React.FC = () => {
                 </div>
                 <div className='flex flex-row items-center gap-4 text-body1 font-normal text-gray-1300'>
                     {designerInfo.location}
-                    <MdContentCopy onClick={handleCopyLoc} />
+                    <MdContentCopy
+                        onClick={() => handleCopyLoc(designerInfo.location)}
+                    />
                 </div>
                 <div className='flex flex-row'>
                     <img
