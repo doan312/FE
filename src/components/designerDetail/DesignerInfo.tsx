@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { MdContentCopy } from 'react-icons/md'
+import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
 
 const DesignerInfo: React.FC = () => {
     const chips = [
@@ -16,6 +18,18 @@ const DesignerInfo: React.FC = () => {
             offline: '30,000',
             online: '20,000',
         },
+    }
+    // 디자이너 정보 받아오기
+    const designerData = useGetDesignerInfo()
+    useEffect(() => {
+        if (designerData.isSuccess) {
+            console.log(designerData.data)
+        }
+    }, [designerData.isSuccess])
+
+    // 주소 복사 기능
+    const handleCopyLoc = () => {
+        // navigator.clipboard.writeText(designerInfo.location)
     }
     return (
         <div className='flex flex-col gap-16 p-[1.25rem] pb-12'>
@@ -37,8 +51,9 @@ const DesignerInfo: React.FC = () => {
                 <div className='text-h2 font-bold text-gray-1300'>
                     박수연 실장
                 </div>
-                <div className='text-body1 font-normal text-gray-1300'>
+                <div className='flex flex-row items-center gap-4 text-body1 font-normal text-gray-1300'>
                     {designerInfo.location}
+                    <MdContentCopy onClick={handleCopyLoc} />
                 </div>
                 <div className='flex flex-row'>
                     <img
