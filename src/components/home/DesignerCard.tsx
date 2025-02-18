@@ -24,7 +24,7 @@ export default function DesignerCard({
 }: Props) {
     return (
         <Link
-            to='#'
+            to='/designerdetail'
             className='flex w-full items-center gap-14 rounded-12 bg-gray-100 px-12 py-10 shadow-[0_1px_12px_rgba(0,0,0,0.08)]'>
             <Profile size='lg' imgUrl={profileImg} />
             <div className='flex flex-col items-start gap-6 grow'>
