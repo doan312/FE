@@ -11,7 +11,6 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
         { text: '직접', bg: '#FFECEC', textColor: '#FE6E81' },
         { text: '온라인', bg: '#ECEFFF', textColor: '#6173FD' },
         { text: '염색전문', bg: '#F5F5F5', textColor: '#8C8C8C' },
-        { text: 'D-DAY', bg: '#EEE5FF', textColor: '#732CF5' },
     ]
     const [designerInfo, setDesignerInfo] = useState({
         name: '',
@@ -47,7 +46,7 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
                     {chips.map((chip, index) => (
                         <span
                             key={index}
-                            className='rounded-s p-[0.12rem] pl-[0.3rem] pr-[0.3rem] text-caption font-normal'
+                            className='rounded-[0.25rem] p-[0.12rem] pl-[0.3rem] pr-[0.3rem] text-caption font-normal'
                             style={{
                                 backgroundColor: chip.bg,
                                 color: chip.textColor,
@@ -57,7 +56,7 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
                     ))}
                 </div>
                 <div className='text-h2 font-bold text-gray-1300'>
-                    박수연 실장
+                    {designerInfo.name}
                 </div>
                 <div className='flex flex-row items-center gap-4 text-body1 font-normal text-gray-1300'>
                     {designerInfo.location}
