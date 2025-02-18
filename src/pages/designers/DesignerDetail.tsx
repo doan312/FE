@@ -48,8 +48,7 @@ const DesignerDetail: React.FC = () => {
         <div>
             <IconContext.Provider
                 value={{
-                    className:
-                        'fixed top-0 left-0 max-w-[480px] min-w-[375px] z-20 bg-transparent w-full align-start h-[3.5625rem] pt-[1.25rem] pb-[1.25rem] pr-[87%] flex justify-start',
+                    className: `fixed top-0 left-0 max-w-[480px] min-w-[375px] z-20 w-full align-start h-[3.5625rem] pt-[1.25rem] pb-[1.25rem] pr-[87%] flex justify-start ${isScrolled ? 'bg-white' : 'bg-transparent'}`,
                 }}>
                 <div>
                     <SlArrowLeft color={isScrolled ? 'black' : 'white'} />
@@ -61,7 +60,7 @@ const DesignerDetail: React.FC = () => {
                 className='relative h-2/5 w-full object-cover'
             />
 
-            <div className='relative z-10 -mt-20 w-full flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
+            <div className='relative z-10 -mt-20 w-[100%] flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
                 <DesignerInfo handleCopyLoc={handleCopyLoc} />
                 <Divider />
                 <Reservation />
