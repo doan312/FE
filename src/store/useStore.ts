@@ -46,6 +46,7 @@ export const useHomeStore = create(
             isSheetOpen: false,
             currentRegion: '서울 전체',
             selectedChips: ['전체'],
+            displayCount: 5,
         },
         (set, get) => {
             return {
@@ -85,6 +86,9 @@ export const useHomeStore = create(
                     }
 
                     set({ selectedChips: newSelectedChips })
+                },
+                addDisplayCount: () => {
+                    set({ displayCount: get().displayCount + 5 })
                 },
             }
         }
