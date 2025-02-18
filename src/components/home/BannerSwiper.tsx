@@ -5,7 +5,7 @@ import { Autoplay } from 'swiper/modules'
 
 export default function BannerSwiper() {
     return (
-        <div className='w-screen -ml-16 mb-44'>
+        <div className='w-full -ml-16 mb-44'>
             <Swiper
                 spaceBetween={12}
                 slidesPerView='auto'

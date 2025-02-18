@@ -1,12 +1,13 @@
-import React from "react";
-import Logo from "../assets/Logo.svg"; // 로고 파일 import
+import React from 'react'
+import Logo from '../assets/Logo.svg' // 로고 파일 import
 
 const Header: React.FC = () => {
-  return (
-    <header className="w-full fixed top-0 left-0 bg-white flex items-center py-[24px] px-[16px] z-50">
-      <img src={Logo} alt="로고" className="h-[24px]" /> {/* 로고 왼쪽 정렬 */}
-    </header>
-  );
-};
+    return (
+        <header className='fixed left-0 right-0 top-0 z-50 mx-auto flex w-full min-w-[375px] max-w-[480px] items-center bg-white px-[16px] py-[24px]'>
+            <img src={Logo} alt='로고' className='h-[24px]' />{' '}
+            {/* 로고 왼쪽 정렬 */}
+        </header>
+    )
+}
 
-export default Header;
+export default Header
