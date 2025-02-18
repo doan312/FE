@@ -94,4 +94,4 @@ define(['./workbox-54d0af47'], function (workbox) {
     allowlist: [/^\/$/]
   }));
 
-}));
+});
