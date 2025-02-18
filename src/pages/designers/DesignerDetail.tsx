@@ -24,8 +24,8 @@ const DesignerDetail: React.FC = () => {
         }
     }
 
-    const handleCopyLoc = () => {
-        navigator.clipboard.writeText('서울시 강남구 테헤란로 427')
+    const handleCopyLoc = (shop: string) => {
+        navigator.clipboard.writeText(shop)
         setShowPopup(true)
     }
 
