@@ -29,7 +29,7 @@ export default function MethodSelectionCard({ type }: Props) {
     return (
         <button
             type='button'
-            className={`relative h-150 w-166 grow rounded-lg border-[1.5px] border-purple-300 p-14 transition duration-200 ease-in-out ${isActive ? 'bg-purple-50' : 'bg-gray-100'}`}
+            className={`gradient-border relative h-150 w-166 grow rounded-lg p-14 transition duration-200 ease-in-out ${isActive ? 'bg-purple-50' : 'bg-gray-100'}`}
             onClick={() => {
                 setCounselMethod(type)
             }}>
