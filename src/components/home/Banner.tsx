@@ -14,8 +14,7 @@ export default function Banner({
     slide,
 }: Props) {
     return (
-        <button
-            type='button'
+        <div
             className={`relative flex h-170 w-[323px] justify-end overflow-hidden rounded-12 ${bgColor}`}>
             <img
                 src={imgUrl}
@@ -31,6 +30,6 @@ export default function Banner({
             <div className='absolute flex items-center justify-center py-2 text-gray-100 bottom-16 right-16 h-fit rounded-12 bg-black/30 px-7 text-caption'>
                 {slide}
             </div>
-        </button>
+        </div>
     )
 }

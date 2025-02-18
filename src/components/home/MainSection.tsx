@@ -1,3 +1,4 @@
+import { designersData } from '../../data/designers'
 import BottomSheet from './BottomSheet'
 import Button from './Button'
 import Chip from './Chip'
@@ -25,11 +26,9 @@ export default function MainSection() {
                 <RegionSectionButton />
             </div>
             <div className='flex flex-col gap-16 mb-16'>
-                <DesignerCard />
-                <DesignerCard />
-                <DesignerCard />
-                <DesignerCard />
-                <DesignerCard />
+                {designersData.map((designer) => (
+                    <DesignerCard {...designer} />
+                ))}
             </div>
             <Button />
             <BottomSheet />
