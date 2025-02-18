@@ -7,11 +7,13 @@ import Divider from '../../components/designerDetail/Divider'
 import Reservation from '../../components/designerDetail/Reservation'
 import ButtonLg from '../../components/designerDetail/ButtonLg'
 import BeforeAfterSection from '../../components/home/BeforeAfterSection'
+import FadePopup from '../../components/reservationcompletes/FadePopup'
 
 const DesignerDetail: React.FC = () => {
     const { reservationTime } = useReservationStore()
     const [isButtonVisible, setIsButtonVisible] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
+    const [showPopup, setShowPopup] = useState(false)
 
     const handleScroll = () => {
         const bannerHeight = window.innerHeight * 0.25
@@ -20,6 +22,11 @@ const DesignerDetail: React.FC = () => {
         } else {
             setIsScrolled(false)
         }
+    }
+
+    const handleCopyLoc = () => {
+        navigator.clipboard.writeText('서울시 강남구 테헤란로 427')
+        setShowPopup(true)
     }
 
     useEffect(() => {
@@ -55,13 +62,21 @@ const DesignerDetail: React.FC = () => {
             />
 
             <div className='relative z-10 -mt-20 w-full flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
-                <DesignerInfo />
+                <DesignerInfo handleCopyLoc={handleCopyLoc} />
                 <Divider />
                 <Reservation />
                 <Divider />
                 {/*  비포 애프터 */}
                 <BeforeAfterSection />
-                {isButtonVisible && <ButtonLg text='예약' />}
+                {/* 페이드인 팝업 */}
+                <FadePopup
+                    show={showPopup}
+                    message='주소가 복사됐어요'
+                    onClose={() => {
+                        setShowPopup(false)
+                    }}
+                />
+                <ButtonLg text='예약' available={isButtonVisible} />
             </div>
         </div>
     )

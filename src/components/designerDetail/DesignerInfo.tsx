@@ -2,7 +2,11 @@ import React, { useEffect } from 'react'
 import { MdContentCopy } from 'react-icons/md'
 import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
 
-const DesignerInfo: React.FC = () => {
+interface DesignerInfoProps {
+    handleCopyLoc: () => void
+}
+
+const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
     const chips = [
         { text: '직접', bg: '#FFECEC', textColor: '#FE6E81' },
         { text: '온라인', bg: '#ECEFFF', textColor: '#6173FD' },
@@ -27,10 +31,6 @@ const DesignerInfo: React.FC = () => {
         }
     }, [designerData.isSuccess])
 
-    // 주소 복사 기능
-    const handleCopyLoc = () => {
-        // navigator.clipboard.writeText(designerInfo.location)
-    }
     return (
         <div className='flex flex-col gap-16 p-[1.25rem] pb-12'>
             {/* 디자이너 정보 */}
