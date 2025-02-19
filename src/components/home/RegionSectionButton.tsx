@@ -1,5 +1,5 @@
 import ArrowIcon from '../../../public/img/arrow-down.svg'
-import { destrictDict } from '../../data/designers'
+import { districtDict } from '../../data/designers'
 import { useHomeStore } from '../../store/useStore'
 
 export default function RegionSectionButton() {
@@ -9,9 +9,9 @@ export default function RegionSectionButton() {
         <button
             type='button'
             onClick={toggleSheet}
-            className='flex items-center gap-4 py-6 bg-transparent'>
-            <span className='text-black text-body2'>
-                {destrictDict[currentRegion]}
+            className='flex items-center gap-4 bg-transparent py-6'>
+            <span className='text-body2 text-black'>
+                {districtDict[currentRegion]}
             </span>
             <img src={ArrowIcon} />
         </button>

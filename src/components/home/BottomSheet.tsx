@@ -2,9 +2,9 @@ import { useState } from 'react'
 import CloseIcon from '../../../public/img/close.svg'
 import RadioItem from './RadioItem'
 import { useHomeStore } from '../../store/useStore'
-import { Destrict } from '../../types/designerTypes'
+import { District } from '../../types/designerTypes'
 
-const regionList: Destrict[] = [
+const regionList: District[] = [
     'SEOUL_ALL',
     'GANGNAM_CHUNGDAM_APGUJUNG',
     'HONGDAE_YEONNAM_HAPJEONG',
@@ -12,7 +12,7 @@ const regionList: Destrict[] = [
 ]
 
 export default function BottomSheet() {
-    const [selectedRegion, setSelectedRegion] = useState<Destrict>('SEOUL_ALL')
+    const [selectedRegion, setSelectedRegion] = useState<District>('SEOUL_ALL')
     const { currentRegion, isSheetOpen, setCurrentRegion, toggleSheet } =
         useHomeStore()
 
@@ -36,8 +36,8 @@ export default function BottomSheet() {
                     <img src={CloseIcon} alt='닫기 아이콘' />
                 </button>
             </div>
-            <div className='w-full h-1 bg-gray-400'></div>
-            <div className='flex flex-col gap-6 mt-5 mx-17 mb-25'>
+            <div className='h-1 w-full bg-gray-400'></div>
+            <div className='mx-17 mb-25 mt-5 flex flex-col gap-6'>
                 {regionList.map((item) => (
                     <RadioItem
                         key={item}
@@ -47,7 +47,7 @@ export default function BottomSheet() {
                     />
                 ))}
             </div>
-            <div className='px-16 pt-10 h-88 border-t-1 border-t-gray-300 pb-30'>
+            <div className='h-88 border-t-1 border-t-gray-300 px-16 pb-30 pt-10'>
                 <button
                     type='button'
                     onClick={handleButtonClick}

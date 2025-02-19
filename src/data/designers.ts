@@ -95,7 +95,7 @@ export const designerDict: {
     '하루 컬러리스트': { shop: '하루헤어컬러스튜디오', rating: 4.9 },
 }
 
-export const destrictDict = {
+export const districtDict = {
     SEOUL_ALL: '서울 전체',
     GANGNAM_CHUNGDAM_APGUJUNG: '강남/청담/압구정',
     HONGDAE_YEONNAM_HAPJEONG: '홍대/연남/합정',
