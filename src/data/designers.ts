@@ -7,6 +7,8 @@ import DesignerImg13 from '../../public/img/designer_image_13.png'
 import { TagType } from '../types/designerTypes'
 
 export const designersData: {
+    id: number
+
     designer: string
     tag: TagType[]
     reservationRate: number
@@ -16,6 +18,7 @@ export const designersData: {
     rating: number
 }[] = [
     {
+        id: 1,
         designer: '이초 디자이너',
         tag: ['FACE_TO_FACE', 'REMOTE', 'PERM'],
         reservationRate: 98,
@@ -25,6 +28,7 @@ export const designersData: {
         rating: 4.9,
     },
     {
+        id: 2,
         designer: '로로 원장',
         tag: ['FACE_TO_FACE', 'REMOTE', 'BLEACH'],
         reservationRate: 99,
@@ -34,6 +38,7 @@ export const designersData: {
         rating: 4.8,
     },
     {
+        id: 3,
         designer: '슈 대표원장',
         tag: ['FACE_TO_FACE', 'BLEACH'],
         reservationRate: 98,
@@ -43,6 +48,7 @@ export const designersData: {
         rating: 4.5,
     },
     {
+        id: 4,
         designer: '히지 디자이너',
         tag: ['REMOTE', 'PERM'],
         reservationRate: 99,
@@ -52,6 +58,7 @@ export const designersData: {
         rating: 4.4,
     },
     {
+        id: 5,
         designer: '랑 원장',
         tag: ['FACE_TO_FACE', 'REMOTE', 'BLEACH'],
         reservationRate: 95,
@@ -61,6 +68,7 @@ export const designersData: {
         rating: 4.9,
     },
     {
+        id: 6,
         designer: '현영 디자이너',
         tag: ['FACE_TO_FACE', 'REMOTE', 'BLEACH'],
         reservationRate: 96,
