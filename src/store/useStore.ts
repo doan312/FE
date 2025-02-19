@@ -2,7 +2,7 @@ import { SpecialtyType } from './../types/designerTypes'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import {
-    Destrict,
+    District,
     MeetingMode,
     SpecialtyChipType,
 } from '../types/designerTypes'
@@ -26,7 +26,7 @@ export const useAccessTokenStore = create<accessTokenStore>()(
 
 export interface Filter {
     meetingModes: MeetingMode
-    destricts: Destrict
+    districts: District
     categories: SpecialtyChipType[]
     size: number
 }
@@ -34,13 +34,13 @@ export interface Filter {
 interface HomeStore {
     meetingMode: MeetingMode
     isSheetOpen: boolean
-    currentRegion: Destrict
+    currentRegion: District
     selectedChips: SpecialtyChipType[]
     displayCount: number
     filter: Filter // 추가됨
     setMeetingMode: (to: MeetingMode) => void
     toggleSheet: () => void
-    setCurrentRegion: (to: Destrict) => void
+    setCurrentRegion: (to: District) => void
     toggleChip: (chip: SpecialtyChipType) => void
     addDisplayCount: () => void
     updateFilter: () => void // 필터 업데이트 함수 추가
@@ -54,7 +54,7 @@ export const useHomeStore = create<HomeStore>((set, get) => ({
     displayCount: 5,
     filter: {
         meetingModes: 'BOTH',
-        destricts: 'SEOUL_ALL',
+        districts: 'SEOUL_ALL',
         categories: ['BLEACH', 'DYEING', 'PERM'],
         size: 5,
     },
@@ -70,7 +70,7 @@ export const useHomeStore = create<HomeStore>((set, get) => ({
         set({ isSheetOpen: !get().isSheetOpen })
     },
 
-    setCurrentRegion: (to: Destrict) => {
+    setCurrentRegion: (to: District) => {
         set({ currentRegion: to })
         get().updateFilter() // 필터 업데이트
     },
@@ -113,7 +113,7 @@ export const useHomeStore = create<HomeStore>((set, get) => ({
         set({
             filter: {
                 meetingModes: meetingMode,
-                destricts: currentRegion,
+                districts: currentRegion,
                 categories,
                 size: displayCount,
             },

@@ -28,7 +28,7 @@ export interface DesignerListResponse {
 
 export type MeetingMode = 'REMOTE' | 'FACE_TO_FACE' | 'BOTH'
 
-export type Destrict =
+export type District =
     | 'SEOUL_ALL'
     | 'GANGNAM_CHUNGDAM_APGUJUNG'
     | 'HONGDAE_YEONNAM_HAPJEONG'
