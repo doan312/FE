@@ -1,4 +1,4 @@
-import { useGetDesignerAll } from '../../apis/api/get/useGetDesignerALl'
+import { useGetDesignerList } from '../../apis/api/get/useGetDesignerList'
 import { designersData } from '../../data/designers'
 import { useHomeStore } from '../../store/useStore'
 import BottomSheet from './BottomSheet'
@@ -6,14 +6,22 @@ import Button from './Button'
 import Chip from './Chip'
 import DesignerCard from './DesignerCard'
 import MethodSelectionCard from './MethodSelectionCard'
+import ErrorCover from './NoResultCover'
 import RegionSectionButton from './RegionSectionButton'
 
 export default function MainSection() {
     const { displayCount } = useHomeStore()
     const visibleDesignerCards = designersData.slice(0, displayCount)
 
-    const { data: designers } = useGetDesignerAll()
-    console.log(designers)
+    const filters = {
+        districts: ['GANGNAM_CHUNGDAM_APGUJUNG'],
+        meetingModes: ['REMOTE'],
+        categories: ['DYEING'],
+        page: 0,
+        size: 5,
+    }
+
+    const { data: designers, error } = useGetDesignerList(filters)
 
     return (
         <div className='flex flex-col mb-44 mt-69'>
@@ -34,9 +42,15 @@ export default function MainSection() {
                 <RegionSectionButton />
             </div>
             <div className='flex flex-col gap-16 mb-16'>
-                {visibleDesignerCards.map((designer) => (
-                    <DesignerCard {...designer} />
-                ))}
+                {designers ? (
+                    visibleDesignerCards.map((designer) => (
+                        <DesignerCard {...designer} />
+                    ))
+                ) : error ? (
+                    <ErrorCover type='network' />
+                ) : (
+                    <ErrorCover type='notfound' />
+                )}
             </div>
             <Button />
             <BottomSheet />
