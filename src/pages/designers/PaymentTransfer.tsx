@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react'
 import PaymentModal from '../../components/paymenttransfers/PaymentModal'
 import InfoForm from '../../components/paymenttransfers/InfoForm'
 import DefaultHearImage from '../../assets/images/default_hear.png'
+import { useReservationStore } from '../../store/useReservationStore'
+import { chips } from '../../utils/chips'
+import dayjs from 'dayjs'
+import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
 
 const PaymentTransfer: React.FC = () => {
     const [showModal, setShowModal] = useState(false)
@@ -18,11 +22,52 @@ const PaymentTransfer: React.FC = () => {
         }
     }, [showModal])
 
+    //예약 정보 전역 상태 연동
+    const { reservationDate, reservationTime, isOnline } = useReservationStore()
+    const chip = isOnline
+        ? chips.find((chip) => chip.text === '온라인')
+        : chips.find((chip) => chip.text === '직접')
+
+    console.log(reservationDate, reservationTime, isOnline)
+
+    // 날짜와 시간을 포맷팅
+    const formattedDate = reservationDate
+        ? dayjs(reservationDate).locale('ko-KR').format('MM.DD(ddd)')
+        : ''
+    const formattedTime = reservationTime ? reservationTime : ''
+
+    // 디자이너 정보 받아오기
+    const [designerInfo, setDesignerInfo] = useState({
+        name: '박수연 실장',
+        location: '준오헤어 반포점',
+        rate: '4.7',
+        comment: '가치를 높여주는 이상적인 스타일을 찾아드려요',
+        price: { offline: '47,000', online: '57,000' },
+    })
+    const designerData = useGetDesignerInfo()
+    useEffect(() => {
+        if (designerData.isSuccess) {
+            const data = designerData.data.data.data
+            setDesignerInfo({
+                name: data.designerName,
+                location: data.designerShop,
+                rate: '4.7',
+                comment: data.designerDescription,
+                price: {
+                    offline: data.designerContactCost,
+                    online: data.designerUntactCost,
+                },
+            })
+        }
+    }, [designerData.isSuccess])
+
     return (
         <div className='flex min-h-[100vh] w-full flex-col items-center bg-white'>
             {/* 상단 헤더 */}
             <div className='fixed top-0 flex w-full min-w-[375px] max-w-[480px] items-center justify-between bg-white px-[8px] py-[16px]'>
-                <button className='border-none bg-transparent p-[8px]'>
+                <button
+                    className='border-none bg-transparent p-[8px]'
+                    onClick={() => window.history.back()}>
                     <div className='flex h-[24px] w-[24px] items-center justify-center bg-transparent'>
                         <svg
                             width='24'
@@ -53,16 +98,18 @@ const PaymentTransfer: React.FC = () => {
                     <img
                         src={DefaultHearImage}
                         alt='디자이너 이미지'
-                        className='object-cover w-full h-full'
+                        className='h-full w-full object-cover'
                     />
                 </div>
             </div>
 
             <div className='w-full max-w-[480px] px-[20px]'>
                 <h3 className='text-[24px] font-bold text-black'>
-                    박수연 실장
+                    {designerInfo.name}
                 </h3>
-                <p className='text-[16px] text-black'>준오헤어 반포점</p>
+                <p className='text-[16px] text-black'>
+                    {designerInfo.location}
+                </p>
 
                 {/* 일정 정보 */}
                 <div className='mt-[8px] flex items-center gap-x-[24px] pb-[24px]'>
@@ -70,7 +117,7 @@ const PaymentTransfer: React.FC = () => {
                         일정
                     </p>
                     <p className='text-[18px] font-semibold text-black'>
-                        05.26(일) 오후 1:00~오후 1:30
+                        {formattedDate} {formattedTime}
                     </p>
                 </div>
 
@@ -85,11 +132,19 @@ const PaymentTransfer: React.FC = () => {
                         결제금액
                     </p>
                     <div className='flex items-center gap-x-[4px]'>
-                        <span className='mr-[6px] rounded-[6px] bg-blue-100 px-[8px] py-[4px] text-[12px] font-semibold text-blue-600'>
-                            온라인
+                        <span
+                            className='mr-[6px] rounded-[6px] px-[8px] py-[4px] text-[12px] font-semibold'
+                            style={{
+                                backgroundColor: chip?.bg,
+                                color: chip?.textColor,
+                            }}>
+                            {chip?.text}
                         </span>
                         <p className='text-[20px] font-bold text-purple-600'>
-                            45,000원
+                            {isOnline
+                                ? designerInfo.price.online
+                                : designerInfo.price.offline}
+                            원
                         </p>
                     </div>
                 </div>

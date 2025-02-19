@@ -44,6 +44,10 @@ const DesignerDetail: React.FC = () => {
         }
     }, [reservationTime])
 
+    const handleBack = () => {
+        window.history.back()
+    }
+
     return (
         <div className='flex flex-col items-center overflow-hidden'>
             <IconContext.Provider
@@ -52,8 +56,11 @@ const DesignerDetail: React.FC = () => {
                         ? 'fixed top-0 left-0 z-20 bg-white w-full align-start h-[3.5625rem] flex justify-start pt-[1.25rem] pb-[1.25rem] pr-[87%] '
                         : 'fixed top-0 left-0 z-20 bg-transparent w-full align-start h-[3.5625rem] pt-[1.25rem] pb-[1.25rem] pr-[87%] flex justify-start',
                 }}>
-                <div className='mx-auto w-full max-w-[1200px]'>
-                    <SlArrowLeft color={isScrolled ? 'black' : 'white'} />
+                <div className='cursor-pointer'>
+                    <SlArrowLeft
+                        color={isScrolled ? 'black' : 'white'}
+                        onClick={handleBack}
+                    />
                 </div>
             </IconContext.Provider>
             <img
