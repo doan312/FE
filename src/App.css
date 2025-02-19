@@ -2,15 +2,18 @@
 .App::-webkit-scrollbar,
 .App::-webkit-scrollbar-thumb,
 .App::-webkit-scrollbar-track {
-  display: none;
+    display: none;
 }
 
 /* Hide scrollbar for IE, Edge, and Firefox */
 .App {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-  min-height: 100vh; /* 화면 세로 100% 사용 */
-  width: 100vw;      /* 화면 가로 100% 사용 */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    min-height: 100vh; /* 화면 세로 100% 사용 */
+    width: 100vw; /* 화면 가로 100% 사용 */
+
+    min-width: 375px;
+    max-width: 480px;
 }
 
 @tailwind base;

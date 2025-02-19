@@ -37,7 +37,7 @@ const Login: React.FC = () => {
 
     //랜딩 화면
     return (
-        <div className='relative flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-b from-[#d8c4fc] to-white'>
+        <div className='relative flex h-screen w-full flex-col items-center justify-center bg-gradient-to-b from-[#d8c4fc] to-white'>
             <div className='flex flex-col items-center justify-center gap-[1rem]'>
                 <img
                     src={'/img/Logo-l.svg'}
@@ -49,12 +49,16 @@ const Login: React.FC = () => {
                 </div>
             </div>
 
-            <button
-                onClick={handleGoogleLogin}
-                className='absolute bottom-[1.88rem] flex h-[3rem] w-[80%] flex-row items-center justify-center gap-[0.25rem] rounded-[0.625rem] bg-gray-1300'>
-                <img src={'/img/google.svg'} alt='google' />
-                <span className='text-body1 font-normal'>구글로 시작하기 </span>
-            </button>
+            <div className='flex w-full flex-col items-center justify-center px-4'>
+                <button
+                    onClick={handleGoogleLogin}
+                    className='absolute bottom-[1.88rem] flex h-[3rem] w-[90%] flex-row items-center justify-center gap-[0.25rem] rounded-[0.625rem] bg-gray-1300 text-gray-100'>
+                    <img src={'/img/google.svg'} alt='google' />
+                    <span className='text-body1 font-normal'>
+                        구글로 시작하기{' '}
+                    </span>
+                </button>
+            </div>
         </div>
     )
 }
