@@ -2,22 +2,17 @@ import { useState } from 'react'
 import CloseIcon from '../../../public/img/close.svg'
 import RadioItem from './RadioItem'
 import { useHomeStore } from '../../store/useStore'
+import { Destrict } from '../../types/designerTypes'
 
-export type Region =
-    | '서울 전체'
-    | '강남/청담/압구정'
-    | '홍대/연남/합정'
-    | '성수/건대'
-
-const regionList: Region[] = [
-    '서울 전체',
-    '강남/청담/압구정',
-    '홍대/연남/합정',
-    '성수/건대',
+const regionList: Destrict[] = [
+    'SEOUL_ALL',
+    'GANGNAM_CHUNGDAM_APGUJUNG',
+    'HONGDAE_YEONNAM_HAPJEONG',
+    'SEONGSU_GUNDAE',
 ]
 
 export default function BottomSheet() {
-    const [selectedRegion, setSelectedRegion] = useState<Region>('서울 전체')
+    const [selectedRegion, setSelectedRegion] = useState<Destrict>('SEOUL_ALL')
     const { currentRegion, isSheetOpen, setCurrentRegion, toggleSheet } =
         useHomeStore()
 
