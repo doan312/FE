@@ -70,3 +70,27 @@ export const designersData: {
         rating: 4.7,
     },
 ]
+
+export const designerDict: {
+    [designer: string]: {
+        shop: string
+        rating: number
+    }
+} = {
+    '이초 디자이너': { shop: '블랑 에 누아르', rating: 4.9 },
+    '로로 원장': { shop: '로로뷰티살롱', rating: 4.8 },
+    '슈 대표원장': { shop: '슈헤어스튜디오', rating: 4.5 },
+    '랑 원장': { shop: '랑크헤어', rating: 4.9 },
+    '히지 디자이너': { shop: '히지헤어 성수점', rating: 4.4 },
+    '현영 디자이너': { shop: '현영헤어갤러리', rating: 4.7 },
+    '나나 디자이너': { shop: '나나헤어살롱', rating: 4.5 },
+    '이아 디자이너': { shop: '이아스타일', rating: 4.9 },
+    '주 디자이너': { shop: '주헤어디자인', rating: 4.8 },
+    '희 수석디자이너': { shop: '희헤어앤메이크업', rating: 4.9 },
+    '시오 부원장': { shop: '시오헤어 강남점', rating: 4.7 },
+    '휘리 원장': { shop: '휘리헤어스파', rating: 4.9 },
+    '유하 디자이너': { shop: '유하헤어스튜디오', rating: 4.3 },
+    '은이 수석디자이너': { shop: '은이헤어살롱', rating: 4.7 },
+    '미미 컬러리스트': { shop: '미미컬러헤어', rating: 4.8 },
+    '하루 컬러리스트': { shop: '하루헤어컬러스튜디오', rating: 4.9 },
+}
