@@ -43,7 +43,7 @@ const CustomCalendar: React.FC<DateSelectProps> = ({
     }, [availableDateList])
 
     return (
-        <div>
+        <div className='align-items-center flex justify-center'>
             <Calendar
                 calendarType='gregory'
                 view='month'
