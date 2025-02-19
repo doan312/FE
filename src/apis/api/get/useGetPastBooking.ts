@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { authApi } from '../..'
 
 // 과거 예약 정보 타입 정의
-interface PastBookingResponse {
+export interface PastBookingResponse {
     designerScheduleId: number
     requestDetails: string
     meetingType: 'REMOTE' | 'OFFLINE' // ENUM 타입 지정

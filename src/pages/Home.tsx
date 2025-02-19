@@ -9,11 +9,14 @@ import BeforeAfterSection from '../components/home/BeforeAfterSection'
 import TabBar from '../components/TabBar/TabBar'
 import BannerSwiper from '../components/home/BannerSwiper'
 import { useAccessTokenStore } from '../store/useStore'
-import { useGetPastBooking } from '../apis/api/get/useGetPastBooking'
+import {
+    PastBookingResponse,
+    useGetPastBooking,
+} from '../apis/api/get/useGetPastBooking'
 
 const Home: React.FC = () => {
     const { data: pastBookingData } = useGetPastBooking()
-    const pastBooking: [] = pastBookingData?.data
+    const pastBooking: PastBookingResponse[] = pastBookingData || []
 
     //사용자 로그인 여부에 따른 화면 분기처리
     const { accessToken } = useAccessTokenStore()
