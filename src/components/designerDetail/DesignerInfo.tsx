@@ -3,20 +3,26 @@ import { MdContentCopy } from 'react-icons/md'
 import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
 interface DesignerInfoProps {
     handleCopyLoc: (shop: string) => void
+    designerId: string
 }
 import { chips } from '../../utils/chips'
 
-const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
+const DesignerInfo: React.FC<DesignerInfoProps> = ({
+    handleCopyLoc,
+    designerId,
+}) => {
     const [designerInfo, setDesignerInfo] = useState({
         name: '박수연 실장',
         location: '준오헤어 반포점',
         rate: '4.7',
         comment: '가치를 높여주는 이상적인 스타일을 찾아드려요',
         price: { offline: '30,000', online: '20,000' },
+        meetingMode: 'BOTH',
+        designerSpecialty: 'PERM',
     })
 
     // 디자이너 정보 받아오기
-    const designerData = useGetDesignerInfo()
+    const designerData = useGetDesignerInfo(designerId)
     useEffect(() => {
         if (designerData.isSuccess) {
             const data = designerData.data.data.data
@@ -29,16 +35,52 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
                     offline: data.designerContactCost,
                     online: data.designerUntactCost,
                 },
+                meetingMode: data.meetingMode,
+                designerSpecialty: data.designerSpecialty,
             })
+            console.log(data)
         }
     }, [designerData.isSuccess])
+
+    //칩 필터링
+    const meetingModeChips = chips.filter((chip) => {
+        if (
+            designerInfo.meetingMode === 'BOTH' ||
+            designerInfo.meetingMode === null
+        ) {
+            return chip.text === '직접' || chip.text === '온라인'
+        }
+        if (designerInfo.meetingMode === 'FACE_TO_FACE') {
+            return chip.text === '직접'
+        }
+        if (designerInfo.meetingMode === 'REMOTE') {
+            return chip.text === '온라인'
+        }
+        return false
+    })
+
+    // 특장점 칩 추가
+    const specialtyMapping = {
+        DYEING: '염색 전문',
+        BLEACH: '탈색 전문',
+        PERM: '펌 전문',
+    }
+
+    const specialtyChip = {
+        text: specialtyMapping[
+            designerInfo.designerSpecialty as keyof typeof specialtyMapping
+        ],
+        bg: '#F5F5F5',
+        textColor: '#8C8C8C',
+    }
+    meetingModeChips.push(specialtyChip)
 
     return (
         <div className='flex flex-col gap-16 p-[1.25rem] pb-12'>
             {/* 디자이너 정보 */}
             <div className='flex flex-col gap-[0.3rem]'>
                 <div className='flex gap-[0.3rem] space-x-2'>
-                    {chips.map((chip, index) => (
+                    {meetingModeChips.map((chip, index) => (
                         <span
                             key={index}
                             className='rounded-[0.25rem] p-[0.12rem] pl-[0.3rem] pr-[0.3rem] text-caption font-normal'
@@ -82,22 +124,28 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
             </div>
             {/* 가격 정보 */}
             <div className='flex flex-col gap-6 pr-2'>
-                <div className='flex flex-row justify-between'>
-                    <span className='text-body1 font-normal text-gray-1300'>
-                        직접
-                    </span>
-                    <span className='text-body1 font-normal text-purple-500'>
-                        {designerInfo.price.offline} ~
-                    </span>
-                </div>
-                <div className='flex flex-row justify-between'>
-                    <span className='text-body1 font-normal text-gray-1300'>
-                        온라인
-                    </span>
-                    <span className='text-body1 font-normal text-purple-500'>
-                        {designerInfo.price.online} ~
-                    </span>
-                </div>
+                {(designerInfo.meetingMode === 'BOTH' ||
+                    designerInfo.meetingMode === 'FACE_TO_FACE') && (
+                    <div className='flex flex-row justify-between'>
+                        <span className='text-body1 font-normal text-gray-1300'>
+                            직접
+                        </span>
+                        <span className='text-body1 font-normal text-purple-500'>
+                            {designerInfo.price.offline} ~
+                        </span>
+                    </div>
+                )}
+                {(designerInfo.meetingMode === 'BOTH' ||
+                    designerInfo.meetingMode === 'REMOTE') && (
+                    <div className='flex flex-row justify-between'>
+                        <span className='text-body1 font-normal text-gray-1300'>
+                            온라인
+                        </span>
+                        <span className='text-body1 font-normal text-purple-500'>
+                            {designerInfo.price.online} ~
+                        </span>
+                    </div>
+                )}
             </div>
         </div>
     )

@@ -5,10 +5,15 @@ import TimeSelectBar from './TimeSelectBar'
 import { useGetAvailableTimes } from '../../apis/api/get/useGetAvailableTimes'
 import dayjs from 'dayjs'
 import { useReservationStore } from '../../store/useReservationStore'
+import { useLocation } from 'react-router-dom'
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
 
-const Reservation: React.FC = () => {
+interface ReservationProps {
+    isBoth: boolean
+}
+
+const Reservation: React.FC<ReservationProps> = ({ isBoth }) => {
     const {
         reservationDate,
         setReservationDate,
@@ -25,9 +30,12 @@ const Reservation: React.FC = () => {
         setReservationTime(time)
     }
 
+    //디자이너 아이디 받기
+    const location = useLocation()
+    const queryParams = new URLSearchParams(location.search)
+    const designerId = queryParams.get('id') || ''
     //예약 가능한 시간 조회
     const [timeTable, setTimeTable] = useState<string[]>([])
-    const designerId = '1' //임시 디자이너 id
     const availableTimes = useGetAvailableTimes(
         designerId,
         dayjs(reservationDate as Date).format('YYYY-MM-DD')
@@ -56,7 +64,7 @@ const Reservation: React.FC = () => {
     return (
         <div className='flex flex-col gap-[1.44rem] pb-[2.8rem] pl-[1.25rem] pr-[1.25rem] pt-[2.8rem]'>
             <div className='text-body1 font-bold text-gray-1300'>상담 예약</div>
-            <ToggleButton />
+            {isBoth && <ToggleButton />}
             <CustomCalendar
                 selectedDate={reservationDate}
                 handleDateClick={handleDateClick}
