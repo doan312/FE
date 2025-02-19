@@ -4,7 +4,7 @@ import React from 'react'
 import Logo from '../components/home/Logo'
 import MainSection from '../components/home/MainSection'
 import RescheduleBanner from '../components/home/RescheduleBanner'
-// import HotNewSection from '../components/home/HotNewSection'
+import HotNewSection from '../components/home/HotNewSection'
 import BeforeAfterSection from '../components/home/BeforeAfterSection'
 import TabBar from '../components/TabBar/TabBar'
 import BannerSwiper from '../components/home/BannerSwiper'
@@ -17,7 +17,7 @@ const Home: React.FC = () => {
             <MainSection />
             <BannerSwiper />
             <RescheduleBanner />
-            {/* <HotNewSection /> */}
+            <HotNewSection />
             <BeforeAfterSection />
             <TabBar />
         </div>

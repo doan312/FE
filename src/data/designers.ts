@@ -1,14 +1,14 @@
-import { CategoryType } from '../components/home/HotNewCard'
 import DesignerImg01 from '../../public/img/designer_image_1.jpg'
 import DesignerImg02 from '../../public/img/designer_image_2.jpg'
 import DesignerImg06 from '../../public/img/designer_image_6.jpg'
 import DesignerImg11 from '../../public/img/designer_image_11.png'
 import DesignerImg12 from '../../public/img/designer_image_12.png'
 import DesignerImg13 from '../../public/img/designer_image_13.png'
+import { TagType } from '../types/designerTypes'
 
 export const designersData: {
     designer: string
-    tag: CategoryType[]
+    tag: TagType[]
     reservationRate: number
     reviewCount: number
     profileImg: string
@@ -17,7 +17,7 @@ export const designersData: {
 }[] = [
     {
         designer: '이초 디자이너',
-        tag: ['직접', '온라인', '펌'],
+        tag: ['FACE_TO_FACE', 'REMOTE', 'PERM'],
         reservationRate: 98,
         reviewCount: 312,
         profileImg: DesignerImg01,
@@ -26,7 +26,7 @@ export const designersData: {
     },
     {
         designer: '로로 원장',
-        tag: ['직접', '온라인', '탈염색'],
+        tag: ['FACE_TO_FACE', 'REMOTE', 'BLEACH'],
         reservationRate: 93,
         reviewCount: 213,
         profileImg: DesignerImg02,
@@ -35,7 +35,7 @@ export const designersData: {
     },
     {
         designer: '슈 대표원장',
-        tag: ['직접', '탈염색'],
+        tag: ['FACE_TO_FACE', 'BLEACH'],
         reservationRate: 96,
         reviewCount: 602,
         profileImg: DesignerImg06,
@@ -44,7 +44,7 @@ export const designersData: {
     },
     {
         designer: '랑 원장',
-        tag: ['직접', '온라인', '탈염색'],
+        tag: ['FACE_TO_FACE', 'REMOTE', 'BLEACH'],
         reservationRate: 95,
         reviewCount: 212,
         profileImg: DesignerImg11,
@@ -53,7 +53,7 @@ export const designersData: {
     },
     {
         designer: '히지 디자이너',
-        tag: ['온라인', '펌'],
+        tag: ['REMOTE', 'PERM'],
         reservationRate: 98,
         reviewCount: 445,
         profileImg: DesignerImg12,
@@ -62,7 +62,7 @@ export const designersData: {
     },
     {
         designer: '현영 디자이너',
-        tag: ['직접', '온라인', '탈염색'],
+        tag: ['FACE_TO_FACE', 'REMOTE', 'BLEACH'],
         reservationRate: 96,
         reviewCount: 315,
         profileImg: DesignerImg13,
@@ -104,7 +104,7 @@ export const destrictDict = {
 
 export const SpecialtyChipDict = {
     ALL: '전체',
-    BLEACH: '탈염색',
+    BLEACH: 'BLEACH',
     DYEING: '염색',
-    PERM: '펌',
+    PERM: 'PERM',
 }
