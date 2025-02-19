@@ -1,10 +1,10 @@
+import { SpecialtyChipDict } from '../../data/designers'
 import { useHomeStore } from '../../store/useStore'
-
-export type ChipType = '전체' | '탈염색' | '염색' | '펌'
+import { SpecialtyChipType } from '../../types/designerTypes'
 
 interface Props {
     active?: boolean
-    value: ChipType
+    value: SpecialtyChipType
 }
 
 export default function Chip({ value }: Props) {
@@ -21,7 +21,7 @@ export default function Chip({ value }: Props) {
             type='button'
             onClick={() => toggleChip(value)}
             className={`rounded-30 px-10 py-6 text-body2 font-medium shadow-[0_0_4px_0_rgba(0,0,0,0.03)] transition duration-200 ease-in-out hover:outline-none ${style}`}>
-            {value}
+            {SpecialtyChipDict[value]}
         </button>
     )
 }
