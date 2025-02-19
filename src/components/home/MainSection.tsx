@@ -13,8 +13,6 @@ export default function MainSection() {
     const { data: responseData, error } = useGetDesignerList(filter)
     const designerList = responseData?.data
 
-    console.log('=====', filter)
-
     return (
         <div className='flex flex-col mb-44 mt-69'>
             <h2 className='mb-16 -mx-4 font-bold text-h2 text-gray-1300'>
