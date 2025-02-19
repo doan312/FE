@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 interface ButtonLgProps {
     text: string
@@ -6,8 +7,9 @@ interface ButtonLgProps {
 }
 
 const ButtonLg: React.FC<ButtonLgProps> = ({ text, available }) => {
+    const navigate = useNavigate()
     const handleClick = () => {
-        window.location.href = '/paymenttransfer'
+        navigate('/paymenttransfer')
     }
     return (
         <div

@@ -1,4 +1,4 @@
-import {create} from 'zustand'
+import { create } from 'zustand'
 
 interface ReservationState {
     designerId: string
@@ -21,3 +21,12 @@ export const useReservationStore = create<ReservationState>((set) => ({
     setReservationTime: (time) => set({ reservationTime: time }),
     setIsOnline: (isOnline) => set({ isOnline }),
 }))
+
+// 상태 변경을 감지하고 콘솔에 로그를 출력하는 함수
+const logStateChanges = () => {
+    const { designerId, reservationDate, reservationTime, isOnline } = useReservationStore.getState()
+    console.log('State changed:', { designerId, reservationDate, reservationTime, isOnline })
+}
+
+// 상태 변경을 구독
+useReservationStore.subscribe(logStateChanges)
