@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PaymentModal from '../../components/paymenttransfers/PaymentModal'
 import InfoForm from '../../components/paymenttransfers/InfoForm'
-import DefaultHearImage from '../../assets/images/default_hear.png'
 import { useReservationStore } from '../../store/useReservationStore'
 import { chips } from '../../utils/chips'
 import dayjs from 'dayjs'

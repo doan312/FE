@@ -8,7 +8,11 @@ import { useReservationStore } from '../../store/useReservationStore'
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
 
-const Reservation: React.FC = () => {
+interface ReservationProps {
+    isBoth: boolean
+}
+
+const Reservation: React.FC<ReservationProps> = ({ isBoth }) => {
     const {
         reservationDate,
         setReservationDate,
@@ -56,7 +60,7 @@ const Reservation: React.FC = () => {
     return (
         <div className='flex flex-col gap-[1.44rem] pb-[2.8rem] pl-[1.25rem] pr-[1.25rem] pt-[2.8rem]'>
             <div className='text-body1 font-bold text-gray-1300'>상담 예약</div>
-            <ToggleButton />
+            {isBoth && <ToggleButton />}
             <CustomCalendar
                 selectedDate={reservationDate}
                 handleDateClick={handleDateClick}

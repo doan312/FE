@@ -17,6 +17,7 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({
         rate: '4.7',
         comment: '가치를 높여주는 이상적인 스타일을 찾아드려요',
         price: { offline: '30,000', online: '20,000' },
+        meetingMode: 'BOTH',
     })
 
     // 디자이너 정보 받아오기
@@ -33,7 +34,9 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({
                     offline: data.designerContactCost,
                     online: data.designerUntactCost,
                 },
+                meetingMode: data.meetingMode,
             })
+            console.log(data)
         }
     }, [designerData.isSuccess])
 
@@ -86,22 +89,28 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({
             </div>
             {/* 가격 정보 */}
             <div className='flex flex-col gap-6 pr-2'>
-                <div className='flex flex-row justify-between'>
-                    <span className='text-body1 font-normal text-gray-1300'>
-                        직접
-                    </span>
-                    <span className='text-body1 font-normal text-purple-500'>
-                        {designerInfo.price.offline} ~
-                    </span>
-                </div>
-                <div className='flex flex-row justify-between'>
-                    <span className='text-body1 font-normal text-gray-1300'>
-                        온라인
-                    </span>
-                    <span className='text-body1 font-normal text-purple-500'>
-                        {designerInfo.price.online} ~
-                    </span>
-                </div>
+                {(designerInfo.meetingMode === 'BOTH' ||
+                    designerInfo.meetingMode === 'FACE_TO_FACE') && (
+                    <div className='flex flex-row justify-between'>
+                        <span className='text-body1 font-normal text-gray-1300'>
+                            직접
+                        </span>
+                        <span className='text-body1 font-normal text-purple-500'>
+                            {designerInfo.price.offline} ~
+                        </span>
+                    </div>
+                )}
+                {(designerInfo.meetingMode === 'BOTH' ||
+                    designerInfo.meetingMode === 'REMOTE') && (
+                    <div className='flex flex-row justify-between'>
+                        <span className='text-body1 font-normal text-gray-1300'>
+                            온라인
+                        </span>
+                        <span className='text-body1 font-normal text-purple-500'>
+                            {designerInfo.price.online} ~
+                        </span>
+                    </div>
+                )}
             </div>
         </div>
     )
