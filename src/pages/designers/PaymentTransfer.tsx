@@ -1,65 +1,191 @@
-import React, { useState, useEffect } from 'react'
-import PaymentModal from '../../components/paymenttransfers/PaymentModal'
-import InfoForm from '../../components/paymenttransfers/InfoForm'
-import DefaultHearImage from '../../assets/images/default_hear.png'
-import { useReservationStore } from '../../store/useReservationStore'
-import { chips } from '../../utils/chips'
-import dayjs from 'dayjs'
-import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
+import React, { useState, useEffect } from "react";
+import PaymentModal from "../../components/paymenttransfers/PaymentModal";
+import InfoForm from "../../components/paymenttransfers/InfoForm";
+import DefaultHearImage from "../../assets/images/default_hear.png";
+import { useReservationStore } from "../../store/useReservationStore";
+import { chips } from "../../utils/chips";
+import dayjs from "dayjs";
+import { useGetDesignerInfo } from "../../apis/api/get/useGetDesignerInfo";
+import { usePostKakaoPay } from "../../apis/api/post/usePostKakaoPay";
+import { usePostBankTransfer } from "../../apis/api/post/usePostBankTransfer";
+import { AxiosError } from "axios";
+import { useNavigate } from "react-router-dom";
+import { usePostBooking } from "../../apis/api/post/usePostBooking"; // ✅ 예약 등록 훅 추가
 
 const PaymentTransfer: React.FC = () => {
-    const [showModal, setShowModal] = useState(false)
-    const [request, setRequest] = useState('')
+    const [showModal, setShowModal] = useState(false);
+    const [request, setRequest] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (showModal) {
-            document.body.style.overflow = 'hidden'
+            document.body.style.overflow = "hidden";
         } else {
-            document.body.style.overflow = 'auto'
+            document.body.style.overflow = "auto";
         }
         return () => {
-            document.body.style.overflow = 'auto'
+            document.body.style.overflow = "auto";
+        };
+    }, [showModal]);
+
+    const { mutate: postKakaoPay } = usePostKakaoPay();
+    const { mutate: postBankTransfer } = usePostBankTransfer();
+    const { mutate: postBooking } = usePostBooking(); // ✅ 🔹 `usePostBooking`을 상위에서 호출
+    const [, setTid] = useState<string | null>(null); // ✅ 카카오페이 tid 저장
+    
+
+    useEffect(() => {
+        // ✅ 세션에서 `pg_token` 가져오기
+        const pg_token = sessionStorage.getItem("pg_token");
+        const designerScheduleId = sessionStorage.getItem("designerScheduleId");
+
+        if (pg_token && designerScheduleId) {
+            console.log("✅ 세션에서 가져온 pg_token:", pg_token);
+            console.log("📌 저장된 designerScheduleId:", designerScheduleId);
+
+            // ✅ 예약 등록 요청 실행
+            const bookingData = {
+                designerScheduleId: Number(designerScheduleId),
+                requestDetails: "헤어 상담 예약",
+                meetingType: "REMOTE" as "REMOTE" | "OFFLINE",
+            };
+
+            console.log("📤 예약 등록 요청 바디:", JSON.stringify(bookingData, null, 2));
+
+            postBooking(bookingData, {
+                onSuccess: () => {
+                    console.log("✅ 예약 등록 성공!");
+                    sessionStorage.removeItem("pg_token"); // 🔹 사용 후 pg_token 삭제
+                    sessionStorage.removeItem("designerScheduleId");
+                    navigate("/reservationcomplete");
+                },
+                onError: (error) => {
+                    console.error("❌ 예약 등록 실패:", error);
+                    navigate("/paymentfailed");
+                },
+            });
         }
-    }, [showModal])
+    }, [postBooking, navigate]);
 
-    //예약 정보 전역 상태 연동
-    const { reservationDate, reservationTime, isOnline } = useReservationStore()
+
+    // ✅ 결제 모달에서 선택한 결제 방식을 처리하는 함수
+    const handlePaymentSelection = (paymentMethod: string | null) => {
+        setShowModal(false); // 모달 닫기
+
+        if (!paymentMethod) {
+            console.log("🚫 결제 방식이 선택되지 않았습니다.");
+            return;
+        }
+
+        console.log(`✅ 선택된 결제 방식: ${paymentMethod}`);
+
+        // ✅ reservationDate를 YYYY-MM-DD 형식으로 변환
+        const formattedDate = dayjs(reservationDate).format("YYYY-MM-DD");
+
+   
+    // ✅ 공통 요청 데이터
+    const requestBody = {
+        designerId: 1,
+        bookingDate: formattedDate, // 🔹 변환된 날짜 사용
+        bookingTime: "10:00:00",
+        item_name: "test",
+        quantity: 1,
+        total_amount: 10,
+        tax_free_amount: 0,
+    };
+
+        console.log(`📤 ${paymentMethod} 요청 데이터:`, requestBody);
+
+        // ✅ 결제 방식에 따라 API 호출 분기
+        if (paymentMethod === "kakaoPay") {
+            postKakaoPay(requestBody, {
+             onSuccess: (data) => {
+                    console.log("✅ 카카오페이 결제 요청 성공:", data);
+                    const { tid, designerScheduleId, next_redirect_pc_url } = data;
+
+                    console.log("📌 designerScheduleId:", designerScheduleId);
+
+                    // 🔹 세션에 tid & designerScheduleId 저장
+                    sessionStorage.setItem("tid", tid);
+                    sessionStorage.setItem("designerScheduleId", designerScheduleId.toString());
+
+                    // 🔹 결제 창 열기
+                    window.location.href = next_redirect_pc_url;
+                },
+                onError: (error) => handlePaymentError(error, "카카오페이"),
+            })
+        } else if (paymentMethod === "bankTransfer") {
+            postBankTransfer(requestBody, {
+                onSuccess: (data) => {
+                    console.log("✅ 계좌이체 결제 요청 성공:", data);
+                    const { tid, designerScheduleId, next_redirect_pc_url } = data;
+
+                    console.log("📌 designerScheduleId:", designerScheduleId);
+
+                    // 🔹 세션에 tid & designerScheduleId 저장
+                    sessionStorage.setItem("tid", tid);
+                    sessionStorage.setItem("designerScheduleId", designerScheduleId.toString());
+
+                    // 🔹 결제 창 열기
+                    window.location.href = next_redirect_pc_url;
+                },
+                onError: (error) => handlePaymentError(error, "계좌이체"),
+            });
+        }
+    };
+
+
+
+    // ✅ 공통 에러 처리 함수
+    const handlePaymentError = (error: unknown, method: string) => {
+        const axiosError = error as AxiosError;
+        console.error(`❌ ${method} 결제 요청 실패:`, axiosError);
+
+        if (axiosError.response) {
+            console.error("🛑 서버 응답 데이터:", axiosError.response.data);
+        } else {
+            console.error("🛑 서버 응답이 없습니다. 요청이 실패했습니다.");
+        }
+    };
+
+    // ✅ 예약 정보 전역 상태 연동
+    const { reservationDate, reservationTime, isOnline } = useReservationStore();
     const chip = isOnline
-        ? chips.find((chip) => chip.text === '온라인')
-        : chips.find((chip) => chip.text === '직접')
+        ? chips.find((chip) => chip.text === "온라인")
+        : chips.find((chip) => chip.text === "직접");
 
-    console.log(reservationDate, reservationTime, isOnline)
+    console.log(reservationDate, reservationTime, isOnline);
 
-    // 날짜와 시간을 포맷팅
+    // ✅ 날짜와 시간 포맷팅
     const formattedDate = reservationDate
-        ? dayjs(reservationDate).locale('ko-KR').format('MM.DD(ddd)')
-        : ''
-    const formattedTime = reservationTime ? reservationTime : ''
+        ? dayjs(reservationDate).locale("ko-KR").format("MM.DD(ddd)")
+        : "";
+    const formattedTime = reservationTime ? reservationTime : "";
 
-    // 디자이너 정보 받아오기
+    // ✅ 디자이너 정보 받아오기
     const [designerInfo, setDesignerInfo] = useState({
-        name: '박수연 실장',
-        location: '준오헤어 반포점',
-        rate: '4.7',
-        comment: '가치를 높여주는 이상적인 스타일을 찾아드려요',
-        price: { offline: '30,000', online: '20,000' },
-    })
-    const designerData = useGetDesignerInfo()
+        name: "박수연 실장",
+        location: "준오헤어 반포점",
+        rate: "4.7",
+        comment: "가치를 높여주는 이상적인 스타일을 찾아드려요",
+        price: { offline: "30,000", online: "20,000" },
+    });
+    const designerData = useGetDesignerInfo();
     useEffect(() => {
         if (designerData.isSuccess) {
-            const data = designerData.data.data.data
+            const data = designerData.data.data.data;
             setDesignerInfo({
                 name: data.designerName,
                 location: data.designerShop,
-                rate: '4.7',
+                rate: "4.7",
                 comment: data.designerDescription,
                 price: {
                     offline: data.designerContactCost,
                     online: data.designerUntactCost,
                 },
-            })
+            });
         }
-    }, [designerData.isSuccess])
+    }, [designerData.isSuccess]);
 
     return (
         <div className='flex min-h-[100vh] w-full flex-col items-center bg-white'>
@@ -174,8 +300,9 @@ const PaymentTransfer: React.FC = () => {
                 </div>
             </div>
 
-            {/* 모달 표시 */}
-            {showModal && <PaymentModal onClose={() => setShowModal(false)} />}
+
+      {/* 모달 표시 */}
+      {showModal && <PaymentModal onClose={handlePaymentSelection} />}
         </div>
     )
 }

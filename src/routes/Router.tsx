@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { Loading } from '../pages/Loading'
-
+import KakaoPaySuccess from "../pages/KakaoPaySuccess";
 // 동적 임포트 (코드 스플리팅 적용)
 const Home = lazy(() => import('../pages/Home'))
 const Onboarding = lazy(() => import('../pages/Onboarding'))
@@ -46,12 +46,14 @@ const Router = () => {
                     path='/reservationinquiry'
                     element={<ReservationInquiry />}
                 />
+                <Route path="/kakaoPaySuccess" element={<KakaoPaySuccess />} />  {/* ✅ 카카오페이 승인 페이지 추가 */}
                 <Route path='/designerdetail' element={<DesignerDetail />} />
                 <Route path='/paymenttransfer' element={<PaymentTransfer />} />
                 <Route
                     path='/reservationcomplete'
                     element={<ReservationComplete />}
                 />
+                   <Route path="/kakaoPaySuccess" element={<KakaoPaySuccess />} /> {/* ✅ 추가 */}
                 <Route path='/servererror' element={<ServerError />} />
                 <Route path='/networkerror' element={<NetworkError />} />
                 <Route path='/splash' element={<Splash />} />
