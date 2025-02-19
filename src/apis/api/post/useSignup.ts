@@ -25,7 +25,7 @@ export const useSignUp = () => {
         //refreshToken cookie 저장
         console.log('리프레시 쿠키',Cookies.get('refreshToken')) 
         //home으로
-        navigate('/')
+        navigate('/onboarding')
       }
     }});
     return mutation;

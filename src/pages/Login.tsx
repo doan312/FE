@@ -49,12 +49,16 @@ const Login: React.FC = () => {
                 </div>
             </div>
 
-            <button
-                onClick={handleGoogleLogin}
-                className='absolute bottom-[1.88rem] flex h-[3rem] w-[80%] flex-row items-center justify-center gap-[0.25rem] rounded-[0.625rem] bg-gray-1300'>
-                <img src={'/img/google.svg'} alt='google' />
-                <span className='font-normal text-body1'>구글로 시작하기 </span>
-            </button>
+            <div className='flex w-full flex-col items-center justify-center px-4'>
+                <button
+                    onClick={handleGoogleLogin}
+                    className='absolute bottom-[1.88rem] flex h-[3rem] w-[90%] flex-row items-center justify-center gap-[0.25rem] rounded-[0.625rem] bg-gray-1300 text-gray-100'>
+                    <img src={'/img/google.svg'} alt='google' />
+                    <span className='text-body1 font-normal'>
+                        구글로 시작하기{' '}
+                    </span>
+                </button>
+            </div>
         </div>
     )
 }
