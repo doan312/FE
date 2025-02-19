@@ -8,11 +8,11 @@ import { chips } from '../../utils/chips'
 
 const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
     const [designerInfo, setDesignerInfo] = useState({
-        name: '',
-        location: '',
-        rate: '',
-        comment: '',
-        price: { offline: '', online: '' },
+        name: '박수연 실장',
+        location: '준오헤어 반포점',
+        rate: '4.7',
+        comment: '가치를 높여주는 이상적인 스타일을 찾아드려요',
+        price: { offline: '30,000', online: '20,000' },
     })
 
     // 디자이너 정보 받아오기

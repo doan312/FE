@@ -42,7 +42,7 @@ const PaymentTransfer: React.FC = () => {
         location: '준오헤어 반포점',
         rate: '4.7',
         comment: '가치를 높여주는 이상적인 스타일을 찾아드려요',
-        price: { offline: '47,000', online: '57,000' },
+        price: { offline: '30,000', online: '20,000' },
     })
     const designerData = useGetDesignerInfo()
     useEffect(() => {
