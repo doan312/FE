@@ -9,19 +9,11 @@ import ErrorCover from './NoResultCover'
 import RegionSectionButton from './RegionSectionButton'
 
 export default function MainSection() {
-    const { displayCount } = useHomeStore()
-
-    const filters = {
-        districts: 'SEOUL_ALL',
-        meetingModes: 'BOTH',
-        categories: 'DYEING',
-        page: 0,
-        size: displayCount,
-    }
-
-    const { data: responseData, error, isLoading } = useGetDesignerList(filters)
-
+    const { filter } = useHomeStore()
+    const { data: responseData, error } = useGetDesignerList(filter)
     const designerList = responseData?.data
+
+    console.log('=====', filter)
 
     return (
         <div className='flex flex-col mb-44 mt-69'>
@@ -29,31 +21,20 @@ export default function MainSection() {
                 어떤 방식으로 상담 받을까요?
             </h2>
             <div className='flex -mx-4 mb-21 gap-11'>
-                <MethodSelectionCard type='inPerson' />
-                <MethodSelectionCard type='online' />
+                <MethodSelectionCard mode='FACE_TO_FACE' />
+                <MethodSelectionCard mode='REMOTE' />
             </div>
             <div className='flex items-center justify-between w-full mb-22'>
                 <div className='flex gap-6'>
-                    <Chip active value='전체' />
-                    <Chip value='탈염색' />
-                    <Chip value='염색' />
-                    <Chip value='펌' />
+                    <Chip active value='ALL' />
+                    <Chip value='BLEACH' />
+                    <Chip value='DYEING' />
+                    <Chip value='PERM' />
                 </div>
                 <RegionSectionButton />
             </div>
-            {/* ✅ 로딩 상태 추가 */}
-            {isLoading && (
-                <p className='text-center text-gray-600'>
-                    디자이너 정보를 불러오는 중...
-                </p>
-            )}
-
             <div className='flex flex-col gap-16 mb-16'>
-                {isLoading ? (
-                    <p className='text-center text-gray-600'>
-                        디자이너 정보를 불러오는 중...
-                    </p>
-                ) : error ? (
+                {error ? (
                     <ErrorCover type='network' />
                 ) : designerList && designerList.length > 0 ? (
                     designerList.map((designer) => {

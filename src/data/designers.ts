@@ -94,3 +94,17 @@ export const designerDict: {
     '미미 컬러리스트': { shop: '미미컬러헤어', rating: 4.8 },
     '하루 컬러리스트': { shop: '하루헤어컬러스튜디오', rating: 4.9 },
 }
+
+export const destrictDict = {
+    SEOUL_ALL: '서울 전체',
+    GANGNAM_CHUNGDAM_APGUJUNG: '강남/청담/압구정',
+    HONGDAE_YEONNAM_HAPJEONG: '홍대/연남/합정',
+    SEONGSU_GUNDAE: '성수/건대',
+}
+
+export const SpecialtyChipDict = {
+    ALL: '전체',
+    BLEACH: '탈염색',
+    DYEING: '염색',
+    PERM: '펌',
+}
