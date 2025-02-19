@@ -8,6 +8,7 @@ import Divider from '../../components/designerDetail/Divider'
 import ButtonLg from '../../components/designerDetail/ButtonLg'
 import BeforeAfterSection from '../../components/home/BeforeAfterSection'
 import FadePopup from '../../components/reservationcompletes/FadePopup'
+import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
 
 const DesignerDetail: React.FC = () => {
     const { reservationTime } = useReservationStore()
@@ -48,6 +49,18 @@ const DesignerDetail: React.FC = () => {
         window.history.back()
     }
 
+    //디자이너 이미지 받아오기
+    const designerData = useGetDesignerInfo()
+    const [bannerUrl, setBannerUrl] = useState(
+        `${import.meta.env.VITE_CLIENT_URL}/img/Banner.png`
+    )
+    useEffect(() => {
+        if (designerData.isSuccess) {
+            const data = designerData.data.data.data
+            setBannerUrl(data.imageUrl)
+        }
+    }, [designerData.isSuccess])
+
     return (
         <div className='flex flex-col items-center overflow-hidden'>
             <IconContext.Provider
@@ -64,9 +77,9 @@ const DesignerDetail: React.FC = () => {
                 </div>
             </IconContext.Provider>
             <img
-                src={`${import.meta.env.VITE_CLIENT_URL}/img/Banner.png`}
+                src={bannerUrl}
                 alt='designer'
-                className='relative h-2/5 w-full object-cover'
+                className='relative h-[16rem] w-full object-cover'
             />
 
             <div className='relative z-10 -mt-20 w-[100%] flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
