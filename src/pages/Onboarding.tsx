@@ -58,7 +58,7 @@ const Onboarding: React.FC = () => {
     }
 
     return (
-        <div className='relative w-full h-screen bg-gray-100 onboarding'>
+        <div className='onboarding relative h-screen w-full bg-gray-100'>
             <Swiper
                 slidesPerView={1}
                 grabCursor={true}
@@ -78,7 +78,7 @@ const Onboarding: React.FC = () => {
                                     alt='온보딩'
                                     className='h-[329px] w-auto max-w-none shrink-0'
                                 />
-                                <h2 className='self-start inline-block font-bold mx-30 text-h1 text-gray-1300'>
+                                <h2 className='mx-30 inline-block self-start text-h1 font-bold text-gray-1300'>
                                     {slide.copy}
                                 </h2>
                             </div>
@@ -86,7 +86,7 @@ const Onboarding: React.FC = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            <div className='absolute bottom-0 left-0 right-0 px-16 pt-10 h-88 border-t-1 border-t-gray-300 pb-30'>
+            <div className='absolute bottom-0 left-0 right-0 h-88 border-t-1 border-t-gray-300 px-16 pb-30 pt-10'>
                 <button
                     type='button'
                     onClick={handleButtonClick}
