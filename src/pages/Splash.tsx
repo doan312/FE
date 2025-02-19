@@ -1,6 +1,5 @@
 import React from 'react'
-
-import SplashLogo from '../assets/icons/spalsh.svg' // SVG 파일 추가
+import SplashLogo from '../assets/icons/splash.svg' // SVG 파일 추가
 
 const Splash: React.FC = () => {
     return (
