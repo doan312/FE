@@ -9,12 +9,17 @@ import ButtonLg from '../../components/designerDetail/ButtonLg'
 import BeforeAfterSection from '../../components/home/BeforeAfterSection'
 import FadePopup from '../../components/reservationcompletes/FadePopup'
 import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
+import { useLocation } from 'react-router-dom'
 
 const DesignerDetail: React.FC = () => {
     const { reservationTime } = useReservationStore()
     const [isButtonVisible, setIsButtonVisible] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
     const [showPopup, setShowPopup] = useState(false)
+
+    const location = useLocation()
+    const queryParams = new URLSearchParams(location.search)
+    const designerId = queryParams.get('id') || ''
 
     const handleScroll = () => {
         const bannerHeight = window.innerHeight * 0.25
@@ -49,15 +54,25 @@ const DesignerDetail: React.FC = () => {
         window.history.back()
     }
 
-    //디자이너 이미지 받아오기
-    const designerData = useGetDesignerInfo()
+    //디자이너 이미지 & 온라인여부 받아오기
+    const designerData = useGetDesignerInfo(designerId)
+    const [isBoth, setIsBoth] = useState(true)
     const [bannerUrl, setBannerUrl] = useState(
         `${import.meta.env.VITE_CLIENT_URL}/img/Banner.png`
     )
+    const { setIsOnline } = useReservationStore()
     useEffect(() => {
         if (designerData.isSuccess) {
             const data = designerData.data.data.data
+            const meetingMode = data.meetingMode
             setBannerUrl(data.imageUrl)
+
+            setIsBoth(meetingMode === 'BOTH' || meetingMode == null)
+            if (meetingMode === 'REMOTE') {
+                setIsOnline(true)
+            } else if (meetingMode === 'FACE_TO_FACE') {
+                setIsOnline(false)
+            }
         }
     }, [designerData.isSuccess])
 
@@ -80,9 +95,12 @@ const DesignerDetail: React.FC = () => {
             />
 
             <div className='relative z-10 -mt-20 w-[100%] flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
-                <DesignerInfo handleCopyLoc={handleCopyLoc} />
+                <DesignerInfo
+                    handleCopyLoc={handleCopyLoc}
+                    designerId={designerId}
+                />
                 <Divider />
-                <Reservation />
+                <Reservation isBoth={isBoth} />
                 <Divider />
                 <div className='px-20 pb-52 pt-38'>
                     <BeforeAfterSection />
@@ -95,7 +113,11 @@ const DesignerDetail: React.FC = () => {
                         setShowPopup(false)
                     }}
                 />
-                <ButtonLg text='예약' available={isButtonVisible} />
+                <ButtonLg
+                    text='예약'
+                    available={isButtonVisible}
+                    designerId={designerId}
+                />
             </div>
         </div>
     )
