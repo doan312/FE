@@ -50,23 +50,20 @@ const DesignerDetail: React.FC = () => {
 
     return (
         <div className='flex flex-col items-center overflow-hidden'>
-            <IconContext.Provider
-                value={{
-                    className: isScrolled
-                        ? 'fixed top-0 left-0 z-20 bg-white w-full align-start h-[3.5625rem] flex justify-start pt-[1.25rem] pb-[1.25rem] pr-[87%] '
-                        : 'fixed top-0 left-0 z-20 bg-transparent w-full align-start h-[3.5625rem] pt-[1.25rem] pb-[1.25rem] pr-[87%] flex justify-start',
-                }}>
-                <div className='cursor-pointer'>
+            <IconContext.Provider value={{}}>
+                <div
+                    className={`fixed left-0 right-0 top-0 z-50 mx-auto flex h-57 w-full min-w-[375px] max-w-[480px] items-center px-16 ${isScrolled ? 'bg-gray-100' : 'bg-transparent'}`}>
                     <SlArrowLeft
                         color={isScrolled ? 'black' : 'white'}
                         onClick={handleBack}
+                        className='h-16'
                     />
                 </div>
             </IconContext.Provider>
             <img
                 src={`${import.meta.env.VITE_CLIENT_URL}/img/Banner.png`}
                 alt='designer'
-                className='relative h-2/5 w-full object-cover'
+                className='relative object-cover w-full h-2/5'
             />
 
             <div className='relative z-10 -mt-20 w-[100%] flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
