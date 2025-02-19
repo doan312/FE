@@ -4,6 +4,7 @@ import '../../styles/calendar.css'
 import dayjs from 'dayjs'
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl'
 import { useGetAvailableDates } from '../../apis/api/get/useGetAvailableDates'
+import { useLocation } from 'react-router-dom'
 
 type ValuePiece = Date | null
 type Value = ValuePiece | [ValuePiece, ValuePiece]
@@ -20,10 +21,13 @@ const CustomCalendar: React.FC<DateSelectProps> = ({
     //선택 가능한 maxDate 설정
     const threeMonthLater = dayjs().add(3, 'month').endOf('month').toDate()
 
+    //디자이너 아이디 받기
+    const location = useLocation()
+    const queryParams = new URLSearchParams(location.search)
+    const designerId = queryParams.get('id') || ''
     /**
      * 예약 가능 기간 조회
      */
-    const designerId = '1' //임시 디자이너 id
     const availableDates = useGetAvailableDates(designerId)
     const [availableDateList, setAvailableDateList] = useState<string[]>([])
 
