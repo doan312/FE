@@ -104,7 +104,7 @@ export const destrictDict = {
 
 export const SpecialtyChipDict = {
     ALL: '전체',
-    BLEACH: 'BLEACH',
+    BLEACH: '탈염색',
     DYEING: '염색',
-    PERM: 'PERM',
+    PERM: '펌',
 }
