@@ -29,7 +29,7 @@ const Home: React.FC = () => {
             <Logo />
             <MainSection />
             <BannerSwiper />
-            {pastBooking.length ? <RescheduleBanner /> : <></>}
+            {!pastBooking || pastBooking.length ? <RescheduleBanner /> : <></>}
             <HotNewSection />
             <BeforeAfterSection />
             <TabBar />
