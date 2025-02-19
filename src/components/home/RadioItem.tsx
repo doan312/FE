@@ -1,9 +1,10 @@
-import { Region } from './BottomSheet'
+import { destrictDict } from '../../data/designers'
+import { Destrict } from '../../types/designerTypes'
 
 interface Props {
     selected?: boolean
-    item: Region
-    setSelected: React.Dispatch<React.SetStateAction<Region>>
+    item: Destrict
+    setSelected: React.Dispatch<React.SetStateAction<Destrict>>
 }
 
 export default function RadioItem({
@@ -17,7 +18,9 @@ export default function RadioItem({
             onClick={() => setSelected(item)}>
             <div
                 className={`h-20 w-20 rounded-xl bg-gray-100 transition duration-200 ease-in-out ${selected ? 'border-5 border-purple-500' : 'border-[1.7px] border-gray-500'}`}></div>
-            <span className='text-body1 text-gray-1200'>{item}</span>
+            <span className='text-body1 text-gray-1200'>
+                {destrictDict[item]}
+            </span>
         </label>
     )
 }
