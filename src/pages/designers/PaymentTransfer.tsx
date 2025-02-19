@@ -31,7 +31,7 @@ const PaymentTransfer: React.FC = () => {
     const { mutate: postKakaoPay } = usePostKakaoPay();
     const { mutate: postBankTransfer } = usePostBankTransfer();
     const { mutate: postBooking } = usePostBooking(); // ✅ 🔹 `usePostBooking`을 상위에서 호출
-    const [, setTid] = useState<string | null>(null); // ✅ 카카오페이 tid 저장
+   
     
 
     useEffect(() => {

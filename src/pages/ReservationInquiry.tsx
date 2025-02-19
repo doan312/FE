@@ -3,10 +3,10 @@ import ReservationList from "../components/reservationinquirys/ReservationList";
 import ConsultationAlert from "../components/reservationinquirys/ConsultationAlert";
 import TabBar from "../components/TabBar/TabBar";
 import Logo from "../components/home/Logo";
-import { useGetCurrentBooking } from "../apis/api/get/useGetCurrentBooking"; // 현재 예약 API
-import { useGetPastBooking } from "../apis/api/get/useGetPastBooking"; // 과거 예약 API
-import { AxiosError } from "axios"; // ✅ Axios 에러 타입 추가
-
+import { useGetCurrentBooking } from "../apis/api/get/useGetCurrentBooking";
+import { useGetPastBooking } from "../apis/api/get/useGetPastBooking";
+import { AxiosError } from "axios";
+import profileImage from "../../public/img/designer_image_6.jpg";
 interface Reservation {
     id: number;
     name: string;
@@ -35,7 +35,6 @@ const ReservationInquiry: React.FC = () => {
         if (currentError) {
             const axiosError = currentError as AxiosError;
             console.error("❌ 현재 예약 API 요청 실패:", axiosError);
-
             if (axiosError.response) {
                 console.error("🛑 현재 예약 API 에러 응답 바디:", axiosError.response.data);
             }
@@ -44,94 +43,52 @@ const ReservationInquiry: React.FC = () => {
         if (pastError) {
             const axiosError = pastError as AxiosError;
             console.error("❌ 과거 예약 API 요청 실패:", axiosError);
-
             if (axiosError.response) {
                 console.error("🛑 과거 예약 API 에러 응답 바디:", axiosError.response.data);
             }
         }
     }, [apiReservations, apiPastReservations, currentError, pastError]);
 
-    // ✅ 초기 Mock Data 유지
-    const mockReservations: Reservation[] = [
-        {
-            id: 1,
-            name: "박수연 실장",
-            date: "2025-02-15",
-            time: "14:00",
-            location: "준오헤어 반포점",
-            status: "결제 완료",
-            online: false,
-            type: "직접",
-        },
-        {
-            id: 2,
-            name: "박수연 실장",
-            date: "2025-02-15",
-            time: "14:00",
-            location: "준오헤어 반포점",
-            status: "입금 확인중",
-            online: true,
-            type: "온라인",
-        },
-    ];
-
-    const mockPastReservations: Reservation[] = [
-        {
-            id: 3,
-            name: "박수연 실장",
-            date: "2025-02-10",
-            time: "14:00",
-            location: "준오헤어 반포점",
-            status: "상담 완료",
-            online: true,
-            type: "온라인",
-        },
-        {
-            id: 4,
-            name: "박수연 실장",
-            date: "2025-02-08",
-            time: "14:00",
-            location: "준오헤어 반포점",
-            status: "상담 취소",
-            online: false,
-            type: "직접",
-        },
-    ];
-
-    // ✅ API 응답을 `Reservation[]` 형태로 변환하는 함수
     const mapApiToReservations = (apiData: any): Reservation[] => {
-        if (!apiData || !Array.isArray(apiData)) return []; // 데이터가 배열이 아닌 경우 빈 배열 반환
-
+        if (!apiData || !Array.isArray(apiData)) return [];
+    
         return apiData.map((item) => ({
-            id: item.id ?? 0,
-            name: item.designerName ?? "알 수 없음",
+            id: item.bookingId ?? 0,
+            name: item.designer?.designerName ?? "알 수 없음",
             date: item.bookingDate ?? "날짜 없음",
             time: item.bookingTime ?? "시간 없음",
-            location: item.location ?? "위치 없음",
-            status: item.status ?? "상태 없음",
+            location: item.designer?.designerShop ?? "위치 없음",
+            status:
+                item.bookingStatus === "CONFIRMED"
+                    ? "결제 완료"
+                    : item.bookingStatus === "PENDING"
+                    ? "입금 확인중"
+                    : item.bookingStatus === "CANCELED"
+                    ? "상담 취소"
+                    : "상담 완료", // ✅ "상태 없음"을 제거하고 기본값을 "상담 완료"로 설정
             online: item.meetingType === "REMOTE",
             type: item.meetingType === "REMOTE" ? "온라인" : "직접",
         }));
     };
 
     // ✅ 실제 사용할 데이터 (API 데이터 변환 후 사용, 없으면 Mock Data)
-    const reservations = apiReservations ? mapApiToReservations(apiReservations) : mockReservations;
-    const pastReservations = apiPastReservations ? mapApiToReservations(apiPastReservations) : mockPastReservations;
+    const reservations = apiReservations ? mapApiToReservations(apiReservations) : [];
+    const pastReservations = apiPastReservations ? mapApiToReservations(apiPastReservations) : [];
 
     return (
         <div className="flex min-h-[100vh] w-full flex-col items-center bg-white">
-            {/* 헤더 (고정된 위치) */}
+            {/* 헤더 */}
             <Logo />
             <TabBar />
 
-            {/* 콘텐츠를 헤더 높이만큼 아래로 이동 */}
+            {/* 콘텐츠 */}
             <div className="mt-[64px] w-full max-w-[768px] p-[20px]">
-                {/* 헤더 아래 알림 컴포넌트 */}
+                {/* 알림 */}
                 <div className="mb-[48px]">
-                    <ConsultationAlert
+                <ConsultationAlert
                         designerName="박수연 실장"
                         consultationType="헤어 스타일링"
-                        profileImage="https://via.placeholder.com/48" // 임시 프로필 이미지
+                        profileImage={profileImage} // ✅ 로컬 이미지 사용
                     />
                 </div>
 
@@ -143,7 +100,7 @@ const ReservationInquiry: React.FC = () => {
                 {/* 지난 컨설팅 */}
                 <ReservationList reservations={pastReservations} title="지난 컨설팅" />
 
-                {/* 로딩 인디케이터 (삭제됨) */}
+                {/* 로딩 인디케이터 */}
                 <div ref={loaderRef} className="flex items-center justify-center py-[16px]"></div>
             </div>
         </div>
