@@ -15,7 +15,7 @@ export default function Logo() {
     }, [])
     return (
         <Link
-            to='/home'
+            to='/'
             className={`fixed left-0 right-0 top-0 z-50 mx-auto flex h-57 w-full min-w-[375px] max-w-[480px] cursor-pointer flex-col justify-center px-[16.5px] transition-all duration-300 ${
                 isScrolled
                     ? 'bg-white bg-opacity-50 backdrop-blur-[30px]'
