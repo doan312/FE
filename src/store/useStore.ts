@@ -79,16 +79,25 @@ export const useHomeStore = create<HomeStore>((set, get) => ({
         const { selectedChips } = get()
         const allOptions: SpecialtyType[] = ['BLEACH', 'DYEING', 'PERM']
 
-        let newSelectedChips = selectedChips.includes(chip)
-            ? selectedChips.filter((c) => c !== chip)
-            : [...selectedChips.filter((c) => c !== 'ALL'), chip]
+        let newSelectedChips: SpecialtyChipType[]
 
-        if (allOptions.every((c) => newSelectedChips.includes(c))) {
+        if (chip === 'ALL') {
+            // 'ALL'을 선택하면 기존 선택된 모든 개별 옵션 해제하고 'ALL'만 선택
             newSelectedChips = ['ALL']
-        }
+        } else {
+            newSelectedChips = selectedChips.includes(chip)
+                ? selectedChips.filter((c) => c !== chip)
+                : [...selectedChips.filter((c) => c !== 'ALL'), chip]
 
-        if (newSelectedChips.length === 0) {
-            newSelectedChips = ['ALL']
+            // 모든 개별 옵션이 선택되었을 경우 'ALL'로 대체
+            if (allOptions.every((c) => newSelectedChips.includes(c))) {
+                newSelectedChips = ['ALL']
+            }
+
+            // 아무것도 선택되지 않으면 'ALL'을 기본값으로 설정
+            if (newSelectedChips.length === 0) {
+                newSelectedChips = ['ALL']
+            }
         }
 
         set({ selectedChips: newSelectedChips })
