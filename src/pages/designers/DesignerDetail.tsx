@@ -45,7 +45,7 @@ const DesignerDetail: React.FC = () => {
     }, [reservationTime])
 
     return (
-        <div>
+        <div className='overflow-hidden'>
             <IconContext.Provider
                 value={{
                     className: isScrolled
@@ -59,7 +59,7 @@ const DesignerDetail: React.FC = () => {
             <img
                 src={`${import.meta.env.VITE_CLIENT_URL}/img/Banner.png`}
                 alt='designer'
-                className='relative h-2/5 w-full object-cover'
+                className='relative object-cover w-full h-2/5'
             />
 
             <div className='relative z-10 -mt-20 w-[100%] flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
@@ -68,7 +68,9 @@ const DesignerDetail: React.FC = () => {
                 <Divider />
                 <Reservation />
                 <Divider />
-                <BeforeAfterSection />
+                <div className='px-20 pb-52 pt-38'>
+                    <BeforeAfterSection />
+                </div>
                 {/* 페이드인 팝업 */}
                 <FadePopup
                     show={showPopup}
