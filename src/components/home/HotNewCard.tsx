@@ -3,12 +3,11 @@ import CheckIcon from '../../../public/img/check.svg'
 import Profile from './Profile'
 import Category from './Category'
 import { Link } from 'react-router-dom'
-
-export type CategoryType = '직접' | '온라인' | '염색 전문' | 'D-DAY'
+import { TagType } from '../../types/designerTypes'
 
 interface Props {
     designer: string
-    tag: CategoryType[]
+    tag: TagType[]
     reservationRate: number
     reviewCount: number
     profileImg: string
@@ -32,7 +31,7 @@ export default function HotNewCard({
                 </span>
                 <div className='flex gap-4'>
                     {tag
-                        .filter((t) => t === '직접' || t == '온라인')
+                        .filter((t) => t === 'FACE_TO_FACE' || t == 'REMOTE')
                         .map((t) => (
                             <Category value={t} />
                         ))}
