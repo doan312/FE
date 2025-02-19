@@ -45,21 +45,21 @@ const DesignerDetail: React.FC = () => {
     }, [reservationTime])
 
     return (
-        <div className='overflow-hidden'>
+        <div className='flex flex-col items-center overflow-hidden'>
             <IconContext.Provider
                 value={{
                     className: isScrolled
-                        ? 'fixed top-0 left-0 max-w-[480px] min-w-[375px] z-20 bg-white w-full align-start h-[3.5625rem] flex justify-start pt-[1.25rem] pb-[1.25rem] pr-[87%]'
-                        : 'fixed top-0 left-0 max-w-[480px] min-w-[375px] z-20 bg-transparent w-full align-start h-[3.5625rem] pt-[1.25rem] pb-[1.25rem] pr-[87%] flex justify-start',
+                        ? 'fixed top-0 left-0 z-20 bg-white w-full align-start h-[3.5625rem] flex justify-start pt-[1.25rem] pb-[1.25rem] pr-[87%] '
+                        : 'fixed top-0 left-0 z-20 bg-transparent w-full align-start h-[3.5625rem] pt-[1.25rem] pb-[1.25rem] pr-[87%] flex justify-start',
                 }}>
-                <div>
+                <div className='mx-auto w-full max-w-[1200px]'>
                     <SlArrowLeft color={isScrolled ? 'black' : 'white'} />
                 </div>
             </IconContext.Provider>
             <img
                 src={`${import.meta.env.VITE_CLIENT_URL}/img/Banner.png`}
                 alt='designer'
-                className='relative object-cover w-full h-2/5'
+                className='relative h-2/5 w-full object-cover'
             />
 
             <div className='relative z-10 -mt-20 w-[100%] flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
