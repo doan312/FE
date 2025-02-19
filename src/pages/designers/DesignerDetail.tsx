@@ -9,12 +9,17 @@ import ButtonLg from '../../components/designerDetail/ButtonLg'
 import BeforeAfterSection from '../../components/home/BeforeAfterSection'
 import FadePopup from '../../components/reservationcompletes/FadePopup'
 import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
+import { useLocation } from 'react-router-dom'
 
 const DesignerDetail: React.FC = () => {
     const { reservationTime } = useReservationStore()
     const [isButtonVisible, setIsButtonVisible] = useState(false)
     const [isScrolled, setIsScrolled] = useState(false)
     const [showPopup, setShowPopup] = useState(false)
+
+    const location = useLocation()
+    const queryParams = new URLSearchParams(location.search)
+    const designerId = queryParams.get('id') || ''
 
     const handleScroll = () => {
         const bannerHeight = window.innerHeight * 0.25
@@ -50,7 +55,7 @@ const DesignerDetail: React.FC = () => {
     }
 
     //디자이너 이미지 받아오기
-    const designerData = useGetDesignerInfo()
+    const designerData = useGetDesignerInfo(designerId)
     const [bannerUrl, setBannerUrl] = useState(
         `${import.meta.env.VITE_CLIENT_URL}/img/Banner.png`
     )
@@ -80,7 +85,10 @@ const DesignerDetail: React.FC = () => {
             />
 
             <div className='relative z-10 -mt-20 w-[100%] flex-auto rounded-t-2xl bg-white pb-10 shadow-md'>
-                <DesignerInfo handleCopyLoc={handleCopyLoc} />
+                <DesignerInfo
+                    handleCopyLoc={handleCopyLoc}
+                    designerId={designerId}
+                />
                 <Divider />
                 <Reservation />
                 <Divider />
@@ -95,7 +103,11 @@ const DesignerDetail: React.FC = () => {
                         setShowPopup(false)
                     }}
                 />
-                <ButtonLg text='예약' available={isButtonVisible} />
+                <ButtonLg
+                    text='예약'
+                    available={isButtonVisible}
+                    designerId={designerId}
+                />
             </div>
         </div>
     )

@@ -3,10 +3,14 @@ import { MdContentCopy } from 'react-icons/md'
 import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
 interface DesignerInfoProps {
     handleCopyLoc: (shop: string) => void
+    designerId: string
 }
 import { chips } from '../../utils/chips'
 
-const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
+const DesignerInfo: React.FC<DesignerInfoProps> = ({
+    handleCopyLoc,
+    designerId,
+}) => {
     const [designerInfo, setDesignerInfo] = useState({
         name: '박수연 실장',
         location: '준오헤어 반포점',
@@ -16,7 +20,7 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
     })
 
     // 디자이너 정보 받아오기
-    const designerData = useGetDesignerInfo()
+    const designerData = useGetDesignerInfo(designerId)
     useEffect(() => {
         if (designerData.isSuccess) {
             const data = designerData.data.data.data

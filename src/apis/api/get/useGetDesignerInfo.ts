@@ -1,9 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { authApi } from '../..'
 
-export const useGetDesignerInfo =()=>{
-  return useQuery({queryKey:['designerInfo'],queryFn: async () => {
-    const designerId = '2'
+export const useGetDesignerInfo =(designerId:string)=>{
+  return useQuery({queryKey:['designerInfo',designerId],queryFn: async () => {
     const res = await authApi.get(`/designer/${designerId}`)
     return res
   }})

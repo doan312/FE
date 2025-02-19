@@ -6,6 +6,7 @@ import { useReservationStore } from '../../store/useReservationStore'
 import { chips } from '../../utils/chips'
 import dayjs from 'dayjs'
 import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
+import { useLocation } from 'react-router-dom'
 
 const PaymentTransfer: React.FC = () => {
     const [showModal, setShowModal] = useState(false)
@@ -44,7 +45,15 @@ const PaymentTransfer: React.FC = () => {
         comment: '가치를 높여주는 이상적인 스타일을 찾아드려요',
         price: { offline: '30,000', online: '20,000' },
     })
-    const designerData = useGetDesignerInfo()
+
+    //디자이너 id 받아오기
+    const location = useLocation()
+    const queryParams = new URLSearchParams(location.search)
+    const designerId = queryParams.get('id') || ''
+    const designerData = useGetDesignerInfo(designerId)
+    const [bannerUrl, setBannerUrl] = useState(
+        `${import.meta.env.VITE_CLIENT_URL}/img/Banner.png`
+    )
     useEffect(() => {
         if (designerData.isSuccess) {
             const data = designerData.data.data.data
@@ -58,6 +67,7 @@ const PaymentTransfer: React.FC = () => {
                     online: data.designerUntactCost,
                 },
             })
+            setBannerUrl(data.imageUrl)
         }
     }, [designerData.isSuccess])
 
@@ -96,7 +106,7 @@ const PaymentTransfer: React.FC = () => {
                 {/* 디자이너 정보 */}
                 <div className='mb-[24px] h-[176px] w-full overflow-hidden rounded-[12px]'>
                     <img
-                        src={DefaultHearImage}
+                        src={bannerUrl}
                         alt='디자이너 이미지'
                         className='h-full w-full object-cover'
                     />
