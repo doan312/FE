@@ -4,19 +4,15 @@ import { useGetDesignerInfo } from '../../apis/api/get/useGetDesignerInfo'
 interface DesignerInfoProps {
     handleCopyLoc: (shop: string) => void
 }
+import { chips } from '../../utils/chips'
 
 const DesignerInfo: React.FC<DesignerInfoProps> = ({ handleCopyLoc }) => {
-    const chips = [
-        { text: '직접', bg: '#FFECEC', textColor: '#FE6E81' },
-        { text: '온라인', bg: '#ECEFFF', textColor: '#6173FD' },
-        { text: '염색전문', bg: '#F5F5F5', textColor: '#8C8C8C' },
-    ]
     const [designerInfo, setDesignerInfo] = useState({
-        name: '',
-        location: '',
-        rate: '',
-        comment: '',
-        price: { offline: '', online: '' },
+        name: '박수연 실장',
+        location: '준오헤어 반포점',
+        rate: '4.7',
+        comment: '가치를 높여주는 이상적인 스타일을 찾아드려요',
+        price: { offline: '30,000', online: '20,000' },
     })
 
     // 디자이너 정보 받아오기
