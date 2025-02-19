@@ -1,3 +1,4 @@
+import { useGetDesignerAll } from '../../apis/api/get/useGetDesignerALl'
 import { designersData } from '../../data/designers'
 import { useHomeStore } from '../../store/useStore'
 import BottomSheet from './BottomSheet'
@@ -10,6 +11,9 @@ import RegionSectionButton from './RegionSectionButton'
 export default function MainSection() {
     const { displayCount } = useHomeStore()
     const visibleDesignerCards = designersData.slice(0, displayCount)
+
+    const { data: designers } = useGetDesignerAll()
+    console.log(designers)
 
     return (
         <div className='flex flex-col mb-44 mt-69'>

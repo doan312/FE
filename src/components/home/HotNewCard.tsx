@@ -4,7 +4,7 @@ import Profile from './Profile'
 import Category from './Category'
 import { Link } from 'react-router-dom'
 
-export type CategoryType = '직접' | '온라인' | '염색 전문' | 'D-DAY'
+export type CategoryType = '직접' | '온라인' | '염색' | '탈염색' | '펌'
 
 interface Props {
     designer: string

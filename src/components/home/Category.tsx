@@ -1,3 +1,5 @@
+import { CategoryType } from './HotNewCard'
+
 const valuesColorData = {
     온라인: {
         textColor: 'text-TXT-blue',
@@ -7,18 +9,22 @@ const valuesColorData = {
         textColor: 'text-TXT-pink',
         bgColor: 'bg-BG-pink',
     },
-    '염색 전문': {
+    염색: {
         textColor: 'text-gray-700',
         bgColor: 'bg-gray-300',
     },
-    'D-DAY': {
-        textColor: 'text-purple-500',
-        bgColor: 'bg-purple-30',
+    탈염색: {
+        textColor: 'text-gray-700',
+        bgColor: 'bg-gray-300',
+    },
+    펌: {
+        textColor: 'text-gray-700',
+        bgColor: 'bg-gray-300',
     },
 }
 
 interface Props {
-    value: '온라인' | '직접' | '염색 전문' | 'D-DAY'
+    value: CategoryType
 }
 
 export default function Category({ value }: Props) {
