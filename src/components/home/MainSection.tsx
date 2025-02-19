@@ -9,11 +9,11 @@ import ErrorCover from './NoResultCover'
 import RegionSectionButton from './RegionSectionButton'
 
 export default function MainSection() {
-    const { filter } = useHomeStore()
+    const { filter, displayCount } = useHomeStore()
     const { data: responseData, error } = useGetDesignerList(filter)
     const designerList = responseData?.data
 
-    console.log('=====', filter)
+    console.log(filter)
 
     return (
         <div className='flex flex-col mb-44 mt-69'>
@@ -44,7 +44,9 @@ export default function MainSection() {
                     <ErrorCover type='notfound' />
                 )}
             </div>
-            <Button />
+            <Button
+                disabled={!designerList || designerList?.length < displayCount}
+            />
             <BottomSheet />
         </div>
     )
