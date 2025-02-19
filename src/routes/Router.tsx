@@ -7,7 +7,7 @@ const Home = lazy(() => import('../pages/Home'))
 const Onboarding = lazy(() => import('../pages/Onboarding'))
 const Login = lazy(() => import('../pages/Login'))
 const ReservationInquiry = lazy(() => import('../pages/ReservationInquiry'))
-
+const Splash = lazy(() => import('../pages/Splash')) // 스플래시 페이지
 const DesignerDetail = lazy(() => import('../pages/designers/DesignerDetail'))
 const PaymentTransfer = lazy(() => import('../pages/designers/PaymentTransfer'))
 const ReservationComplete = lazy(
@@ -54,6 +54,7 @@ const Router = () => {
                 />
                 <Route path='/servererror' element={<ServerError />} />
                 <Route path='/networkerror' element={<NetworkError />} />
+                <Route path='/splash' element={<Splash />} />
                 {/* 🔹 404 Not Found 라우트 */}
                 <Route path='*' element={<NotFound />} />
             </Routes>
