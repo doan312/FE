@@ -11,6 +11,7 @@ import { usePostBankTransfer } from '../../apis/api/post/usePostBankTransfer'
 import { AxiosError } from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { usePostBooking } from '../../apis/api/post/usePostBooking' // ✅ 예약 등록 훅 추가
+import { useReservationCompleteStore } from '../../store/useReservationCompleteStore'
 
 const PaymentTransfer: React.FC = () => {
     const [showModal, setShowModal] = useState(false)
@@ -31,7 +32,9 @@ const PaymentTransfer: React.FC = () => {
 
     const { mutate: postKakaoPay } = usePostKakaoPay()
     const { mutate: postBankTransfer } = usePostBankTransfer()
-    const { mutate: postBooking } = usePostBooking() // ✅ 🔹 `usePostBooking`을 상위에서 호출
+    const { mutate: postBooking } = usePostBooking()
+
+    const { setReservationCompleteData } = useReservationCompleteStore()
 
     useEffect(() => {
         // ✅ 세션에서 `pg_token` 가져오기
@@ -59,8 +62,8 @@ const PaymentTransfer: React.FC = () => {
             postBooking(bookingData, {
                 onSuccess: () => {
                     console.log('✅ 예약 등록 성공!')
-                    sessionStorage.removeItem('designerScheduleId')
                     setIsBooking(false)
+                    setReservationCompleteData(bookingData)
                     navigate('/reservationcomplete')
                 },
                 onError: (error) => {

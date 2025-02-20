@@ -1,19 +1,43 @@
-import React from "react";
+import React from 'react'
+import { useReservationCompleteStore } from '../../store/useReservationCompleteStore'
+import dayjs from 'dayjs'
+import 'dayjs/locale/ko'
 
 const ReservationInfo: React.FC = () => {
-  return (
-    <div className="mt-[16px] inline-flex w-fit p-[16px] bg-transparent border-[1px] border-gray-500 rounded-[16px] mx-auto">
-      {/* 한 줄 정렬 */}
-      <div className="flex items-center gap-x-[8px] whitespace-nowrap">
-        <span className="px-[8px] py-[4px] font-semibold text-blue-600 bg-blue-100 rounded-[6px] text-[14px] mr-[4px]">
-          온라인
-        </span>
-        <p className="text-gray-950 font-semibold text-[18px]">
-          05.26(일) 오후 1:00~오후 1:30
-        </p>
-      </div>
-    </div>
-  );
-};
+    const { bookingDate, bookingTime, meetingType } =
+        useReservationCompleteStore()
+    const isOnline = meetingType === 'REMOTE'
 
-export default ReservationInfo;
+    // 날짜와 시간을 포맷팅
+    const formattedDate = dayjs(bookingDate).locale('ko').format('MM.DD(ddd)')
+    const formattedTime = dayjs(`${bookingDate}T${bookingTime}`)
+        .locale('ko')
+        .format('A h:mm')
+
+    return (
+        <div className='mx-auto mt-[16px] inline-flex w-fit rounded-[16px] border-[1px] border-gray-500 bg-transparent p-[16px]'>
+            {/* 한 줄 정렬 */}
+            <div className='flex items-center gap-x-[8px] whitespace-nowrap'>
+                {isOnline ? (
+                    <span className='mr-[4px] rounded-[6px] bg-blue-100 px-[8px] py-[4px] text-[14px] font-semibold text-blue-600'>
+                        온라인
+                    </span>
+                ) : (
+                    <span
+                        className='mr-[4px] rounded-[6px] px-[8px] py-[4px] text-[14px] font-semibold'
+                        style={{
+                            backgroundColor: '#FFECEC',
+                            color: '#FE6E81',
+                        }}>
+                        직접
+                    </span>
+                )}
+                <p className='text-[18px] font-semibold text-gray-950'>
+                    {formattedDate} {formattedTime}
+                </p>
+            </div>
+        </div>
+    )
+}
+
+export default ReservationInfo
