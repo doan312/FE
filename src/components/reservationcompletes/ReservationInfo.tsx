@@ -8,11 +8,15 @@ const ReservationInfo: React.FC = () => {
         useReservationCompleteStore()
     const isOnline = meetingType === 'REMOTE'
 
+    console.log(bookingDate, bookingTime, meetingType)
+
     // 날짜와 시간을 포맷팅
     const formattedDate = dayjs(bookingDate).locale('ko').format('MM.DD(ddd)')
     const formattedTime = dayjs(`${bookingDate}T${bookingTime}`)
         .locale('ko')
         .format('A h:mm')
+
+    console.log(formattedDate, formattedTime)
 
     return (
         <div className='mx-auto mt-[16px] inline-flex w-fit rounded-[16px] border-[1px] border-gray-500 bg-transparent p-[16px]'>
