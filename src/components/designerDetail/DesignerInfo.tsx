@@ -92,10 +92,10 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({
                         </span>
                     ))}
                 </div>
-                <div className='text-h2 font-bold text-gray-1300'>
+                <div className='font-bold text-h2 text-gray-1300'>
                     {designerInfo.name}
                 </div>
-                <div className='flex flex-row items-center gap-4 text-body1 font-normal text-gray-1300'>
+                <div className='flex flex-row items-center gap-4 font-normal text-body1 text-gray-1300'>
                     {designerInfo.location}
                     <MdContentCopy
                         onClick={() => handleCopyLoc(designerInfo.location)}
@@ -106,7 +106,7 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({
                         src={`${import.meta.env.VITE_CLIENT_URL}/img/star-on.svg`}
                         alt='star'
                     />
-                    <div className='flex items-end text-body2 font-normal text-gray-1300'>
+                    <div className='flex items-end font-normal text-body2 text-gray-1300'>
                         {designerInfo.rate}
                     </div>
                 </div>
@@ -118,31 +118,31 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({
                     src={`${import.meta.env.VITE_CLIENT_URL}/img/logo-s-svg.svg`}
                     alt='logo'
                 />
-                <div className='flex w-4/5 items-end text-body2 font-normal text-gray-1300'>
+                <div className='flex items-end w-4/5 font-normal text-body2 text-gray-1300'>
                     {designerInfo.comment}
                 </div>
             </div>
             {/* 가격 정보 */}
-            <div className='flex flex-col gap-6 pr-2'>
+            <div className='flex flex-col gap-6 pr-2 mb-40'>
                 {(designerInfo.meetingMode === null ||
                     designerInfo.meetingMode === 'FACE_TO_FACE') && (
                     <div className='flex flex-row justify-between'>
-                        <span className='text-body1 font-normal text-gray-1300'>
+                        <span className='font-normal text-body1 text-gray-1300'>
                             직접
                         </span>
-                        <span className='text-body1 font-normal text-purple-500'>
-                            {designerInfo.price.offline} ~
+                        <span className='font-normal text-purple-500 text-body1'>
+                            {`${designerInfo.price.offline.toLocaleString()}원 ~`}
                         </span>
                     </div>
                 )}
                 {(designerInfo.meetingMode === null ||
                     designerInfo.meetingMode === 'REMOTE') && (
                     <div className='flex flex-row justify-between'>
-                        <span className='text-body1 font-normal text-gray-1300'>
+                        <span className='font-normal text-body1 text-gray-1300'>
                             온라인
                         </span>
-                        <span className='text-body1 font-normal text-purple-500'>
-                            {designerInfo.price.online} ~
+                        <span className='font-normal text-purple-500 text-body1'>
+                            {`${designerInfo.price.online.toLocaleString()}원 ~`}
                         </span>
                     </div>
                 )}
