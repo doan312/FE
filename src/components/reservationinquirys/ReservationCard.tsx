@@ -166,7 +166,7 @@ const ReservationCard: React.FC<{ reservation: Reservation }> = ({
                         onClick={handleCancelClick}>
                         예약 취소
                     </button>
-                ) : reservation.status === '결제 완료' || reservation.online ? (
+                ) : reservation.status === '결제 완료' && reservation.online ? (
                     <>
                         <button
                             className={getButtonStyle(false)}
