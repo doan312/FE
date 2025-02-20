@@ -26,7 +26,7 @@ export const useAccessTokenStore = create<accessTokenStore>()(
 
 export interface Filter {
     meetingMode?: MeetingMode | null
-    district: District
+    district: District | null
     categories: SpecialtyChipType[]
     size: number
     page: number
@@ -57,7 +57,7 @@ export const useHomeStore = create<HomeStore>((set, get) => ({
     displayCount: 5,
     filter: {
         meetingMode: null,
-        district: 'SEOUL_ALL',
+        district: null,
         categories: ['BLEACH', 'DYEING', 'PERM'],
         size: 5,
         page: 0,
@@ -128,7 +128,7 @@ export const useHomeStore = create<HomeStore>((set, get) => ({
         set({
             filter: {
                 meetingMode: meetingMode === 'BOTH' ? null : meetingMode,
-                district: currentRegion,
+                district: currentRegion === 'SEOUL_ALL' ? null : currentRegion,
                 categories,
                 page: 0,
                 size: displayCount,

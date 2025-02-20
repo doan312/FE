@@ -14,7 +14,9 @@ export const useGetDesignerList = (filter: Filter) => {
             if (!params.meetingMode) {
                 delete params.meetingMode
             }
-
+            if (!params.district) {
+                delete params.meetingMode
+            }
             // page가 누락되지 않도록 기본값 설정
             params.page = params.page ?? 0
 
