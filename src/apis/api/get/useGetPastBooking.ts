@@ -5,7 +5,7 @@ import { authApi } from '../..'
 export interface PastBookingResponse {
     designerScheduleId: number
     requestDetails: string
-    meetingType: 'REMOTE' | 'OFFLINE' // ENUM 타입 지정
+    meetingType: 'REMOTE' | 'FACE_TO_FACE' // ENUM 타입 지정
 }
 
 // API 호출 훅

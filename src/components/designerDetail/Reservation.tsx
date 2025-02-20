@@ -19,6 +19,7 @@ const Reservation: React.FC<ReservationProps> = ({ isBoth }) => {
         setReservationDate,
         reservationTime,
         setReservationTime,
+        setReservationTimeRaw,
     } = useReservationStore()
 
     //날짜 선택
@@ -28,6 +29,18 @@ const Reservation: React.FC<ReservationProps> = ({ isBoth }) => {
 
     const handleTimeClick = (time: string) => {
         setReservationTime(time)
+
+        // 시간 포맷팅
+        const [period, timePart] = time.split(' ')
+        const [hour, minute] = timePart.split(':')
+        let hourNumber = parseInt(hour, 10)
+        if (period === '오후' && hourNumber !== 12) {
+            hourNumber += 12
+        } else if (period === '오전' && hourNumber === 12) {
+            hourNumber = 0
+        }
+        const formattedTime = `${hourNumber.toString().padStart(2, '0')}:${minute}:00`
+        setReservationTimeRaw(formattedTime)
     }
 
     //디자이너 아이디 받기

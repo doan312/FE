@@ -16,6 +16,7 @@ const PaymentTransfer: React.FC = () => {
     const [showModal, setShowModal] = useState(false)
     const [request, setRequest] = useState('')
     const navigate = useNavigate()
+    const [isBooking, setIsBooking] = useState(false)
 
     useEffect(() => {
         if (showModal) {
@@ -37,15 +38,17 @@ const PaymentTransfer: React.FC = () => {
         const pg_token = sessionStorage.getItem('pg_token')
         const designerScheduleId = sessionStorage.getItem('designerScheduleId')
 
-        if (pg_token && designerScheduleId) {
-            console.log('✅ 세션에서 가져온 pg_token:', pg_token)
+        //계좌이체 로직
+        if (designerScheduleId && isBooking) {
             console.log('📌 저장된 designerScheduleId:', designerScheduleId)
 
             // ✅ 예약 등록 요청 실행
             const bookingData = {
                 designerScheduleId: Number(designerScheduleId),
-                requestDetails: '헤어 상담 예약',
-                meetingType: 'REMOTE' as 'REMOTE' | 'OFFLINE',
+                requestDetails: request,
+                meetingType: isOnline
+                    ? 'REMOTE'
+                    : ('FACE_TO_FACE' as 'REMOTE' | 'FACE_TO_FACE'),
             }
 
             console.log(
@@ -56,17 +59,50 @@ const PaymentTransfer: React.FC = () => {
             postBooking(bookingData, {
                 onSuccess: () => {
                     console.log('✅ 예약 등록 성공!')
-                    sessionStorage.removeItem('pg_token') // 🔹 사용 후 pg_token 삭제
                     sessionStorage.removeItem('designerScheduleId')
+                    setIsBooking(false)
                     navigate('/reservationcomplete')
                 },
                 onError: (error) => {
                     console.error('❌ 예약 등록 실패:', error)
+                    setIsBooking(false)
                     navigate('/paymentfailed')
                 },
             })
         }
-    }, [postBooking, navigate])
+        //카카페 로직
+        if (pg_token && designerScheduleId && isBooking) {
+            console.log('✅ 세션에서 가져온 pg_token:', pg_token)
+            console.log('📌 저장된 designerScheduleId:', designerScheduleId)
+
+            // ✅ 예약 등록 요청 실행
+            const bookingData = {
+                designerScheduleId: Number(designerScheduleId),
+                requestDetails: request,
+                meetingType: isOnline
+                    ? 'REMOTE'
+                    : ('FACE_TO_FACE' as 'REMOTE' | 'FACE_TO_FACE'),
+            }
+
+            console.log(
+                '📤 예약 등록 요청 바디:',
+                JSON.stringify(bookingData, null, 2)
+            )
+
+            postBooking(bookingData, {
+                onSuccess: () => {
+                    console.log('✅ 예약 등록 성공!')
+                    setIsBooking(false)
+                    navigate('/reservationcomplete')
+                },
+                onError: (error) => {
+                    console.error('❌ 예약 등록 실패:', error)
+                    setIsBooking(false)
+                    navigate('/paymentfailed')
+                },
+            })
+        }
+    }, [postBooking, navigate, isBooking])
 
     // ✅ 결제 모달에서 선택한 결제 방식을 처리하는 함수
     const handlePaymentSelection = (paymentMethod: string | null) => {
@@ -82,11 +118,12 @@ const PaymentTransfer: React.FC = () => {
         // ✅ reservationDate를 YYYY-MM-DD 형식으로 변환
         const formattedDate = dayjs(reservationDate).format('YYYY-MM-DD')
 
+        console.log(`${reservationTimeRaw}`)
         // ✅ 공통 요청 데이터
         const requestBody = {
-            designerId: 1,
+            designerId: Number(designerId),
             bookingDate: formattedDate, // 🔹 변환된 날짜 사용
-            bookingTime: '10:00:00',
+            bookingTime: reservationTimeRaw || '', //
             item_name: 'test',
             quantity: 1,
             total_amount: 10,
@@ -112,6 +149,8 @@ const PaymentTransfer: React.FC = () => {
                         designerScheduleId.toString()
                     )
 
+                    setIsBooking(true)
+
                     // 🔹 결제 창 열기
                     window.location.href = next_redirect_pc_url
                 },
@@ -121,20 +160,14 @@ const PaymentTransfer: React.FC = () => {
             postBankTransfer(requestBody, {
                 onSuccess: (data) => {
                     console.log('✅ 계좌이체 결제 요청 성공:', data)
-                    const { tid, designerScheduleId, next_redirect_pc_url } =
-                        data
+                    const { designerScheduleId } = data
 
-                    console.log('📌 designerScheduleId:', designerScheduleId)
-
-                    // 🔹 세션에 tid & designerScheduleId 저장
-                    sessionStorage.setItem('tid', tid)
+                    // 🔹 세션에 designerScheduleId 저장
                     sessionStorage.setItem(
                         'designerScheduleId',
                         designerScheduleId.toString()
                     )
-
-                    // 🔹 결제 창 열기
-                    window.location.href = next_redirect_pc_url
+                    setIsBooking(true)
                 },
                 onError: (error) => handlePaymentError(error, '계좌이체'),
             })
@@ -154,12 +187,11 @@ const PaymentTransfer: React.FC = () => {
     }
 
     // ✅ 예약 정보 전역 상태 연동
-    const { reservationDate, reservationTime, isOnline } = useReservationStore()
+    const { reservationDate, reservationTime, isOnline, reservationTimeRaw } =
+        useReservationStore()
     const chip = isOnline
         ? chips.find((chip) => chip.text === '온라인')
         : chips.find((chip) => chip.text === '직접')
-
-    console.log(reservationDate, reservationTime, isOnline)
 
     // ✅ 날짜와 시간 포맷팅
     const formattedDate = reservationDate

@@ -16,7 +16,7 @@ export const authApi:AxiosInstance = axios.create({
 //요청 인터셉터
 authApi.interceptors.request.use(
   (config) => {
-    const accessToken = useAccessTokenStore.getState().accessToken; // getState() 바로 사용 가능!
+    const accessToken = 'eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCbGF5YnVzIiwic3ViIjoiMSIsImlhdCI6MTc0MDAwOTc2NywiZXhwIjoxNzQwMDI3NzY3LCJ0eXBlIjoiQWNjZXNzVG9rZW4iLCJyb2xlIjoiVVNFUiJ9.SCMw62dy5oUkdE6BaiXKzO8eMllfPkwn1w3jD2Ug7KA' // getState() 바로 사용 가능!
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
