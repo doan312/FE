@@ -46,11 +46,11 @@ const ReservationInquiry: React.FC = () => {
             time: item.bookingTime ?? '시간 없음',
             location: item.designerShop ?? '위치 없음',
             status:
-                item.paymentStatus === 'CONFIRMED'
+                item.bookingStatus === 'CONFIRMED'
                     ? '결제 완료'
-                    : item.paymentStatus === 'PENDING'
+                    : item.bookingStatus === 'PENDING'
                       ? '입금 확인중'
-                      : item.paymentStatus === 'CANCELED'
+                      : item.bookingStatus === 'CANCELED'
                         ? '상담 취소'
                         : '상담 완료', // ✅ "상태 없음"을 제거하고 기본값을 "상담 완료"로 설정
             online: item.meetingType === 'REMOTE',
@@ -116,13 +116,15 @@ const ReservationInquiry: React.FC = () => {
             {/* 콘텐츠 */}
             <div className='mt-[64px] w-full max-w-[768px] p-[20px]'>
                 {/* 알림 */}
-                <div className='mb-[48px]'>
-                    <ConsultationAlert
-                        designerName={reservations[0]?.name}
-                        consultationType='헤어 스타일링'
-                        profileImage={profileImage} // ✅ 로컬 이미지 사용
-                    />
-                </div>
+                {reservations.length > 0 && (
+                    <div className='mb-[48px]'>
+                        <ConsultationAlert
+                            designerName={reservations[0]?.name}
+                            consultationType='헤어 스타일링'
+                            profileImage={profileImage} // ✅ 로컬 이미지 사용
+                        />
+                    </div>
+                )}
 
                 {/* 다가오는 예약 */}
                 <div className='mb-[48px]'>

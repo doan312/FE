@@ -11,7 +11,8 @@ import FadePopup from '../../components/reservationcompletes/FadePopup' // ✅ �
 const ReservationComplete: React.FC = () => {
     const location = useLocation()
     const navigate = useNavigate()
-    const paymentMethod = location.state?.paymentMethod || '알 수 없음'
+    const queryParams = new URLSearchParams(location.search)
+    const paymentMethod = queryParams.get('type') || ''
 
     const [showPopup, setShowPopup] = useState(false)
 

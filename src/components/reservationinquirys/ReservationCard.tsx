@@ -160,13 +160,35 @@ const ReservationCard: React.FC<{ reservation: Reservation }> = ({
 
             {/* 버튼 영역 */}
             <div className='mt-[12px] flex gap-[10px]'>
-                {reservation.status === '결제 완료' ||
-                reservation.status === '입금 확인중' ? (
+                {reservation.status === '입금 확인중' ? (
                     <button
                         className={getButtonStyle(false)}
                         onClick={handleCancelClick}>
                         예약 취소
                     </button>
+                ) : reservation.status === '결제 완료' && reservation.online ? (
+                    <>
+                        <button
+                            className={getButtonStyle(false)}
+                            onClick={() =>
+                                window.open(
+                                    'https://docs.google.com/document/d/1yOYJgiM_-5b42Wb9DnTfcr3GhGG8wkxW1REuAVPGyog/edit?tab=t.0',
+                                    '_blank'
+                                )
+                            }>
+                            요약 리포트
+                        </button>
+                        <button
+                            className={getButtonStyle(false)}
+                            onClick={() =>
+                                window.open(
+                                    'https://meet.google.com/rag-gbqn-yuf',
+                                    '_blank'
+                                )
+                            }>
+                            미팅 입장하기
+                        </button>
+                    </>
                 ) : (
                     <>
                         <button
