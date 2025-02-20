@@ -10,14 +10,17 @@ export const useGetDesignerList = (filter: Filter) => {
         queryFn: async () => {
             const params = { ...filter }
 
-            // meetingMode가 null이면 요청에서 제거
-            if (!params.meetingMode) {
+            // meetingMode가 null 또는 undefined일 때만 제거
+            if (params.meetingMode == null) {
                 delete params.meetingMode
             }
-            if (!params.district) {
-                delete params.meetingMode
+
+            // district가 null이면 district만 삭제해야 함 (meetingMode가 아니라)
+            if (params.district == null) {
+                delete params.district
             }
-            // page가 누락되지 않도록 기본값 설정
+
+            // page 기본값 설정
             params.page = params.page ?? 0
 
             const res = await authApi.get<DesignerListResponse>(
@@ -25,7 +28,7 @@ export const useGetDesignerList = (filter: Filter) => {
                 {
                     params,
                     paramsSerializer: (params) =>
-                        qs.stringify(params, { arrayFormat: 'repeat' }), // ✅ axios에서 배열을 올바르게 처리
+                        qs.stringify(params, { arrayFormat: 'repeat' }),
                 }
             )
 

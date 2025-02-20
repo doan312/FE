@@ -56,7 +56,7 @@ const ReservationComplete: React.FC = () => {
             )}
 
             {/* 하단 고정 버튼 그룹 */}
-            <div className='fixed bottom-0 left-0 w-full bg-white shadow-[0px_4px_10px_rgba(0,0,0,0.1)]'>
+            <div className='fixed bottom-0 left-0 right-0 mx-auto w-full min-w-[375px] max-w-[480px] bg-white shadow-[0px_4px_10px_rgba(0,0,0,0.1)]'>
                 {/* 계좌 복사 버튼 (페이드인/페이드아웃) */}
 
                 {/* ✅ 페이드인 팝업 */}
@@ -70,7 +70,7 @@ const ReservationComplete: React.FC = () => {
                 <hr className='w-full border-t-[1px] border-gray-300' />
 
                 {/* 하단 버튼들 */}
-                <div className='flex flex-col items-center px-[16px] py-[20px]'>
+                <div className='mx-auto flex flex-col items-center px-[16px] py-[20px]'>
                     <div className='flex w-full max-w-[400px] gap-[16px]'>
                         <button
                             className='w-[50%] rounded-[12px] bg-black px-[24px] py-[12px] text-[18px] font-medium text-white shadow-md'
