@@ -12,7 +12,7 @@ const TimeSelectBar: React.FC<TimeSelectBarProps> = ({
     timeTable,
 }) => {
     return (
-        <div className='flex flex-row justify-center gap-[0.62rem] overflow-scroll'>
+        <div className='flex flex-row gap-[0.62rem] overflow-scroll'>
             {timeTable.map((time, index) => (
                 <button
                     key={index}
