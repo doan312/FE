@@ -123,7 +123,7 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({
                 </div>
             </div>
             {/* 가격 정보 */}
-            <div className='flex flex-col gap-6 pr-2'>
+            <div className='flex flex-col gap-6 pr-2 mb-40'>
                 {(designerInfo.meetingMode === null ||
                     designerInfo.meetingMode === 'FACE_TO_FACE') && (
                     <div className='flex flex-row justify-between'>
