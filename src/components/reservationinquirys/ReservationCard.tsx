@@ -160,14 +160,13 @@ const ReservationCard: React.FC<{ reservation: Reservation }> = ({
 
             {/* 버튼 영역 */}
             <div className='mt-[12px] flex gap-[10px]'>
-                {reservation.status === '결제 완료' ||
-                reservation.status === '입금 확인중' ? (
+                {reservation.status === '입금 확인중' ? (
                     <button
                         className={getButtonStyle(false)}
                         onClick={handleCancelClick}>
                         예약 취소
                     </button>
-                ) : reservation.online ? (
+                ) : reservation.status === '결제 완료' || reservation.online ? (
                     <>
                         <button
                             className={getButtonStyle(true)}
