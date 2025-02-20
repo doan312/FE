@@ -116,13 +116,15 @@ const ReservationInquiry: React.FC = () => {
             {/* 콘텐츠 */}
             <div className='mt-[64px] w-full max-w-[768px] p-[20px]'>
                 {/* 알림 */}
-                <div className='mb-[48px]'>
-                    <ConsultationAlert
-                        designerName={reservations[0]?.name}
-                        consultationType='헤어 스타일링'
-                        profileImage={profileImage} // ✅ 로컬 이미지 사용
-                    />
-                </div>
+                {reservations.length > 0 && (
+                    <div className='mb-[48px]'>
+                        <ConsultationAlert
+                            designerName={reservations[0]?.name}
+                            consultationType='헤어 스타일링'
+                            profileImage={profileImage} // ✅ 로컬 이미지 사용
+                        />
+                    </div>
+                )}
 
                 {/* 다가오는 예약 */}
                 <div className='mb-[48px]'>
