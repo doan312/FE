@@ -169,7 +169,7 @@ const ReservationCard: React.FC<{ reservation: Reservation }> = ({
                 ) : reservation.status === '결제 완료' || reservation.online ? (
                     <>
                         <button
-                            className={getButtonStyle(true)}
+                            className={getButtonStyle(false)}
                             onClick={() =>
                                 window.open(
                                     'https://docs.google.com/document/d/1yOYJgiM_-5b42Wb9DnTfcr3GhGG8wkxW1REuAVPGyog/edit?tab=t.0',
@@ -178,7 +178,14 @@ const ReservationCard: React.FC<{ reservation: Reservation }> = ({
                             }>
                             요약 리포트
                         </button>
-                        <button className={getButtonStyle(true)}>
+                        <button
+                            className={getButtonStyle(false)}
+                            onClick={() =>
+                                window.open(
+                                    'https://meet.google.com/rag-gbqn-yuf',
+                                    '_blank'
+                                )
+                            }>
                             미팅 입장하기
                         </button>
                     </>
