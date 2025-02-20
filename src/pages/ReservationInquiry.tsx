@@ -46,11 +46,11 @@ const ReservationInquiry: React.FC = () => {
             time: item.bookingTime ?? '시간 없음',
             location: item.designerShop ?? '위치 없음',
             status:
-                item.paymentStatus === 'CONFIRMED'
+                item.bookingStatus === 'CONFIRMED'
                     ? '결제 완료'
-                    : item.paymentStatus === 'PENDING'
+                    : item.bookingStatus === 'PENDING'
                       ? '입금 확인중'
-                      : item.paymentStatus === 'CANCELED'
+                      : item.bookingStatus === 'CANCELED'
                         ? '상담 취소'
                         : '상담 완료', // ✅ "상태 없음"을 제거하고 기본값을 "상담 완료"로 설정
             online: item.meetingType === 'REMOTE',
