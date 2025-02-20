@@ -26,7 +26,7 @@ export const useAccessTokenStore = create<accessTokenStore>()(
 
 export interface Filter {
     meetingMode?: MeetingMode | null
-    district: District | null
+    district?: District | null
     categories: SpecialtyChipType[]
     size: number
     page: number
