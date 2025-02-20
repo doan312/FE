@@ -65,7 +65,7 @@ const PaymentTransfer: React.FC = () => {
                     console.log('✅ 예약 정보:', bookingData)
                     setReservationCompleteData(bookingData)
                     setIsBooking(false)
-                    navigate('/reservationcomplete')
+                    navigate('/reservationcomplete?type=bankTransfer')
                 },
                 onError: (error) => {
                     console.error('❌ 예약 등록 실패:', error)
