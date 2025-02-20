@@ -124,7 +124,7 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({
             </div>
             {/* 가격 정보 */}
             <div className='flex flex-col gap-6 pr-2'>
-                {(designerInfo.meetingMode === 'BOTH' ||
+                {(designerInfo.meetingMode === null ||
                     designerInfo.meetingMode === 'FACE_TO_FACE') && (
                     <div className='flex flex-row justify-between'>
                         <span className='text-body1 font-normal text-gray-1300'>
@@ -135,7 +135,7 @@ const DesignerInfo: React.FC<DesignerInfoProps> = ({
                         </span>
                     </div>
                 )}
-                {(designerInfo.meetingMode === 'BOTH' ||
+                {(designerInfo.meetingMode === null ||
                     designerInfo.meetingMode === 'REMOTE') && (
                     <div className='flex flex-row justify-between'>
                         <span className='text-body1 font-normal text-gray-1300'>
