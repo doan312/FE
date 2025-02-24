@@ -1,7 +1,5 @@
 import axios,{AxiosInstance} from 'axios';
 import { useAccessTokenStore } from '../store/useStore';
-import { useRefresh } from './api/post/useRefresh';
-
 
 export const baseApi:AxiosInstance = axios.create({
   baseURL : `${import.meta.env.VITE_SERVER_URL}/api`,
@@ -18,7 +16,7 @@ export const authApi:AxiosInstance = axios.create({
 //요청 인터셉터
 authApi.interceptors.request.use(
   (config) => {
-    const accessToken = useAccessTokenStore.getState().accessToken; // getState() 바로 사용 가능!
+       const accessToken = useAccessTokenStore.getState().accessToken; // getState() 바로 사용 가능!
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -27,15 +25,21 @@ authApi.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+
 // 응답 인터셉터
 authApi.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response && error.response.status === 401) {
-      const { mutateAsync } = useRefresh(); // useRefresh 훅 호출
-      
+    if (error.response && error.response.status === 403) {
+      console.log('에러', error.response.status);
       try {
-        await mutateAsync(); // 리프레시 토큰 요청
+        console.log('리프레시 토큰 요청');
+        const { data } = await baseApi.post('/auth/refresh', null);
+        if (data.data.isRegistered) {
+          // accessToken 저장
+          const { setAccessToken } = useAccessTokenStore.getState();
+          setAccessToken(data.data.accessToken);
+        }
         return authApi.request(error.config); // 원래 요청 재시도
       } catch (refreshError) {
         console.error('리프레시 토큰 실패', refreshError);

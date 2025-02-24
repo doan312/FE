@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom'
 interface ButtonLgProps {
     text: string
     available: boolean
+    designerId: string
 }
 
-const ButtonLg: React.FC<ButtonLgProps> = ({ text, available }) => {
+const ButtonLg: React.FC<ButtonLgProps> = ({ text, available, designerId }) => {
     const navigate = useNavigate()
     const handleClick = () => {
-        navigate('/paymenttransfer')
+        navigate(`/paymenttransfer?id=${designerId}`)
     }
     return (
         <div className={`h-88 border-t-1 border-t-gray-300 px-16 pb-30 pt-10`}>

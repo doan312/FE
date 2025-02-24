@@ -5,7 +5,7 @@ import { authApi } from "../..";
 interface CurrentBookingResponse {
     designerScheduleId: number;
     requestDetails: string;
-    meetingType: "REMOTE" | "OFFLINE"; // ENUM 타입 지정
+    meetingType: "REMOTE" | "FACE_TO_FACE"; // ENUM 타입 지정
 }
 
 // API 호출 훅
@@ -14,7 +14,7 @@ export const useGetCurrentBooking = () => {
         queryKey: ["currentBooking"], // React Query 캐싱 키
         queryFn: async () => {
             const res = await authApi.get("/booking/current"); // ✅ GET 요청
-            return res.data;
+            return res.data.data;
         },
         staleTime: 1000 * 60 * 5, // 5분 동안 캐싱된 데이터 유지
     });

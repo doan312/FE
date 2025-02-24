@@ -7,6 +7,8 @@ import DesignerImg13 from '../../public/img/designer_image_13.png'
 import { TagType } from '../types/designerTypes'
 
 export const designersData: {
+    id: number
+
     designer: string
     tag: TagType[]
     reservationRate: number
@@ -16,6 +18,7 @@ export const designersData: {
     rating: number
 }[] = [
     {
+        id: 1,
         designer: '이초 디자이너',
         tag: ['FACE_TO_FACE', 'REMOTE', 'PERM'],
         reservationRate: 98,
@@ -25,24 +28,37 @@ export const designersData: {
         rating: 4.9,
     },
     {
+        id: 2,
         designer: '로로 원장',
         tag: ['FACE_TO_FACE', 'REMOTE', 'BLEACH'],
-        reservationRate: 93,
-        reviewCount: 213,
+        reservationRate: 99,
+        reviewCount: 58,
         profileImg: DesignerImg02,
         shop: '로로뷰티살롱',
         rating: 4.8,
     },
     {
+        id: 3,
         designer: '슈 대표원장',
         tag: ['FACE_TO_FACE', 'BLEACH'],
-        reservationRate: 96,
-        reviewCount: 602,
+        reservationRate: 98,
+        reviewCount: 455,
         profileImg: DesignerImg06,
         shop: '슈헤어스튜디오',
         rating: 4.5,
     },
     {
+        id: 4,
+        designer: '히지 디자이너',
+        tag: ['REMOTE', 'PERM'],
+        reservationRate: 99,
+        reviewCount: 117,
+        profileImg: DesignerImg12,
+        shop: '히지헤어 성수점',
+        rating: 4.4,
+    },
+    {
+        id: 5,
         designer: '랑 원장',
         tag: ['FACE_TO_FACE', 'REMOTE', 'BLEACH'],
         reservationRate: 95,
@@ -52,15 +68,7 @@ export const designersData: {
         rating: 4.9,
     },
     {
-        designer: '히지 디자이너',
-        tag: ['REMOTE', 'PERM'],
-        reservationRate: 98,
-        reviewCount: 445,
-        profileImg: DesignerImg12,
-        shop: '히지헤어 성수점',
-        rating: 4.4,
-    },
-    {
+        id: 6,
         designer: '현영 디자이너',
         tag: ['FACE_TO_FACE', 'REMOTE', 'BLEACH'],
         reservationRate: 96,
@@ -95,7 +103,7 @@ export const designerDict: {
     '하루 컬러리스트': { shop: '하루헤어컬러스튜디오', rating: 4.9 },
 }
 
-export const destrictDict = {
+export const districtDict = {
     SEOUL_ALL: '서울 전체',
     GANGNAM_CHUNGDAM_APGUJUNG: '강남/청담/압구정',
     HONGDAE_YEONNAM_HAPJEONG: '홍대/연남/합정',
